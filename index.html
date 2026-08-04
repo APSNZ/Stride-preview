@@ -1226,4 +1226,246 @@ renderMyResources();renderLibrary();bindResourceButtons();
 })();
 </script>
 
+
+<style id="v52-overrides">
+  .onboarding{position:absolute!important;inset:0!important;left:0!important;right:0!important;top:0!important;bottom:0!important;width:100%!important;max-width:100%!important;height:100%!important;transform:none!important;margin:0!important}
+  #slides,.slides{width:100%!important;height:100%!important;display:flex!important}
+  .slide{flex:0 0 100%!important;min-width:100%!important;width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+  .splash,.guide-slide,.patient-centred-slide,.intro-copy,.intro-image,.splash-content,.guide-heading,.guide-options,.guide-bottom{width:100%!important;max-width:100%!important}
+  .splash-bg,.splash-bg img,.intro-image img{width:100%!important;max-width:100%!important}
+  .home-hero-greeting h1.hero-pop{animation:heroGreetingPop .55s cubic-bezier(.2,.8,.2,1)}
+  .home-hero-greeting p.hero-pop{animation:heroGreetingFade .75s ease .08s both}
+  @keyframes heroGreetingPop{0%{opacity:0;transform:translateY(10px) scale(.98)}65%{opacity:1;transform:translateY(0) scale(1.03)}100%{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes heroGreetingFade{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
+  .rehab-card.v52-card{margin-top:16px!important;padding:18px!important;background:#f6f8fb!important}
+  .rehab-card.v52-card .rehab-card-copy p{margin-bottom:0}
+  .rehab-card.v52-card .rehab-chart-wrap{margin-top:14px;padding:14px 12px 10px;border-radius:18px}
+  .rehab-card.v52-card .rehab-chart{width:100%;height:auto}
+  .rehab-card.v52-card .chart-axis{stroke:#0b5f9b;stroke-width:2.1}
+  .rehab-card.v52-card .chart-function{stroke:#17a5e6;stroke-width:4.2}
+  .rehab-card.v52-card .chart-pain{stroke:#cf1b24;stroke-width:4.2}
+  .rehab-card.v52-card .chart-marker{stroke:#1e74aa;stroke-width:2;stroke-dasharray:4 4}
+  .rehab-card.v52-card .chart-note{font-size:11px;fill:#667085;font-weight:600}
+  .rehab-card.v52-card .chart-tick{font-size:10px;fill:#475467}
+  .rehab-card.v52-card .chart-legend{margin-top:8px;font-size:11.5px}
+  .journey-v52-card{border:1px solid #dbe5ef;border-radius:18px;background:#f7f9fc;margin:0 18px 12px;overflow:hidden;box-shadow:0 6px 16px rgba(8,47,91,.045)}
+  .journey-v52-card.current{border:1.5px solid var(--navy);background:#f4f8fd}
+  .journey-v52-card.completed{border-color:#cfe8d9;background:#f7fcf9}
+  .journey-v52-head{width:100%;border:0;background:transparent;padding:14px 14px 13px;display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:11px;align-items:center;text-align:left}
+  .journey-v52-number{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#eaf1f8;color:var(--navy);font-weight:850;font-size:14px}
+  .journey-v52-card.completed .journey-v52-number{background:#dff5e7;color:#11824b}
+  .journey-v52-card.current .journey-v52-number{background:var(--navy);color:#fff}
+  .journey-v52-copy small{display:block;color:var(--muted);font-size:10px;margin-bottom:4px;line-height:1.2}
+  .journey-v52-copy strong{display:block;color:var(--navy);font-size:14px;line-height:1.25}
+  .journey-v52-state{font-size:9px;font-weight:800;padding:5px 8px;border-radius:999px;background:#ecf1f6;color:#64748b;white-space:nowrap}
+  .journey-v52-card.completed .journey-v52-state{background:#dff5e7;color:#11824b}
+  .journey-v52-card.current .journey-v52-state{background:var(--navy);color:#fff}
+  .journey-v52-detail{display:none;padding:0 14px 14px 65px;border-top:1px solid rgba(219,229,239,.9)}
+  .journey-v52-card.open .journey-v52-detail{display:block}
+  .journey-v52-summary{font-size:11.5px;line-height:1.55;color:var(--muted);margin:12px 0 10px}
+  .journey-v52-rows{display:grid;gap:8px}
+  .journey-v52-row{display:grid;grid-template-columns:68px 1fr;gap:10px;padding-top:8px;border-top:1px solid rgba(219,229,239,.85)}
+  .journey-v52-row strong{font-size:10.5px;color:var(--navy);line-height:1.35}
+  .journey-v52-row span{font-size:10.5px;line-height:1.45;color:#516072}
+  .journey-v52-footer{display:flex;justify-content:flex-end;align-items:center;margin-top:12px}
+  .journey-v52-action{border:1px solid #cdd8e5;background:#fff;color:var(--navy);border-radius:999px;padding:9px 12px;font-size:11px;font-weight:800}
+  .journey-v52-action.current{background:#eaf1f8;color:var(--navy);border-color:#d5e0ec}
+  .journey-v52-action:hover{background:#f4f8fd}
+</style>
+<script id="v52-script">
+(function(){
+  const $=(sel,root=document)=>root.querySelector(sel);
+  const $$=(sel,root=document)=>Array.from(root.querySelectorAll(sel));
+  const stageData=[
+    {
+      name:'Getting Started',
+      weeks:'Weeks 1–4',
+      note:'You are building your foundation with regular FMT sessions, early exercises and close support from your podiatrist.',
+      summary:'Your initial assessment and first FMT adjustment are already complete. These first 4 weeks usually include consistent FMT adjustments together with the introduction of exercises.',
+      fmt:'Restore movement, reduce restriction and begin regular hands-on FMT care.',
+      patient:'Attend appointments consistently, start your prescribed exercises and notice how your symptoms respond.',
+      milestone:'Initial assessment completed and first FMT adjustment underway.'
+    },
+    {
+      name:'Foundation Phase',
+      weeks:'Weeks 5–8',
+      note:'This phase builds on the gains made during Getting Started as your progress review guides the next part of your plan.',
+      summary:'Foundation Phase follows your initial Getting Started phase and your Progress Review milestone. FMT usually becomes a little less frequent while progress is reinforced and exercises are progressed.',
+      fmt:'Maintain movement gains, support strength and control, and reinforce the changes created earlier.',
+      patient:'Keep up your prescribed exercises, keep moving regularly and stay engaged with the plan.',
+      milestone:'Progress Review completed and your next-stage plan confirmed.'
+    },
+    {
+      name:'Maintenance Phase',
+      weeks:'Weeks 9–13',
+      note:'You are moving toward greater self-management while your podiatrist checks that progress is holding.',
+      summary:'Maintenance Phase follows your 90-day Review milestone. Regular FMT is usually reduced while your podiatrist monitors that movement is holding and there is no regression.',
+      fmt:'Monitor long-term movement, reduce visit frequency when appropriate and support self-management tools.',
+      patient:'Continue your exercises, use the tools you have built and attend planned reviews.',
+      milestone:'90-day Review completed and longer-term recommendations confirmed.'
+    },
+    {
+      name:'Ongoing Support',
+      weeks:'After 90 days',
+      note:'Your structured phase is complete. Keep using your tools and book support if symptoms return or change.',
+      summary:'Your structured phase is complete. Many patients continue independently and book periodic reviews if symptoms return, goals change or they want support staying on track.',
+      fmt:'Review movement, symptoms and exercise progress only as needed.',
+      patient:'Keep moving, maintain your exercises when helpful and contact APS if you need support again.',
+      milestone:'Independent self-management with support available when needed.'
+    }
+  ];
+  function currentStage(){
+    const raw=Number(localStorage.getItem('strideJourneyStage')||0);
+    return Number.isFinite(raw)?Math.max(0,Math.min(stageData.length-1,raw)):0;
+  }
+  function applyGreetingAnimation(){
+    const h1=$('#timeGreeting');
+    const p=$('.home-hero-greeting p');
+    if(!h1||!p)return;
+    h1.classList.remove('hero-pop'); p.classList.remove('hero-pop');
+    void h1.offsetWidth;
+    h1.classList.add('hero-pop'); p.classList.add('hero-pop');
+  }
+  function syncGreeting(){
+    const now=new Date();
+    const hour=now.getHours();
+    const greeting=hour<12?'Good morning':hour<18?'Good afternoon':'Good evening';
+    const saved=(localStorage.getItem('strideProfilePreferredName')||localStorage.getItem('strideProfileFirstName')||localStorage.getItem('strideProfileName')||'Alex').trim()||'Alex';
+    const first=saved.split(/\s+/)[0];
+    const holder=$('#timeGreeting');
+    const name=$('#homeFirstName');
+    if(holder&&name){
+      holder.innerHTML=`${greeting},<br><span id="homeFirstName">${first}</span>!`;
+      applyGreetingAnimation();
+    }
+  }
+  function syncGoalAndPain(){
+    const goalInput=$('#onboardGoal');
+    const painBtn=$('[data-onboard-pain].selected');
+    if(goalInput && goalInput.value.trim()) localStorage.setItem('strideGoal',goalInput.value.trim());
+    if(painBtn) localStorage.setItem('strideInitialPain',painBtn.dataset.onboardPain);
+    const goal=(localStorage.getItem('strideGoal')||'Move more comfortably and confidently.').trim()||'Move more comfortably and confidently.';
+    const pain=localStorage.getItem('strideInitialPain');
+    if($('#progressGoalText')) $('#progressGoalText').textContent=goal;
+    if($('#summaryGoal')) $('#summaryGoal').textContent=goal;
+    if($('#progressInitialPain')) $('#progressInitialPain').textContent=(pain!==null&&pain!=='')?pain+'/10':'Not recorded';
+    if($('#summaryStartPain')) $('#summaryStartPain').textContent=(pain!==null&&pain!=='')?pain+'/10':'Not recorded';
+  }
+  function updateHomeStage(){
+    const stage=stageData[currentStage()];
+    if($('#homeStageLabel')) $('#homeStageLabel').textContent=stage.name;
+    if($('#homeStageNote')) $('#homeStageNote').textContent=stage.note;
+    if($('#journeyProgressLabel')) $('#journeyProgressLabel').textContent=stage.name;
+    if($('#journeyProgressPercent')) $('#journeyProgressPercent').textContent=((currentStage()+1)*25)+'%';
+    if($('#journeyProgressFill')) $('#journeyProgressFill').style.width=((currentStage()+1)*25)+'%';
+  }
+  function renderJourney(){
+    const host=$('#journeyPhaseList');
+    if(!host) return;
+    const current=currentStage();
+    host.innerHTML=stageData.map((stage,i)=>{
+      const status=i<current?'Completed':i===current?'Current':'Upcoming';
+      const action=i===current?'<span class="journey-v52-action current">Current phase</span>':`<button class="journey-v52-action" type="button" data-v52-select="${i}">Mark as current</button>`;
+      const icon=i<current?'✓':(i+1);
+      return `<article class="journey-v52-card ${i<current?'completed':''} ${i===current?'current open':''}" data-v52-card="${i}">
+        <button class="journey-v52-head" type="button" data-v52-toggle="${i}">
+          <span class="journey-v52-number">${icon}</span>
+          <span class="journey-v52-copy"><small>${stage.weeks}</small><strong>${stage.name}</strong></span>
+          <span class="journey-v52-state">${status}</span>
+        </button>
+        <div class="journey-v52-detail">
+          <p class="journey-v52-summary">${stage.summary}</p>
+          <div class="journey-v52-rows">
+            <div class="journey-v52-row"><strong>FMT focus</strong><span>${stage.fmt}</span></div>
+            <div class="journey-v52-row"><strong>Your focus</strong><span>${stage.patient}</span></div>
+            <div class="journey-v52-row"><strong>Milestone</strong><span>${stage.milestone}</span></div>
+          </div>
+          <div class="journey-v52-footer">${action}</div>
+        </div>
+      </article>`;
+    }).join('');
+  }
+  function wireJourney(){
+    document.addEventListener('click',function(e){
+      const toggle=e.target.closest('[data-v52-toggle]');
+      if(toggle){
+        e.preventDefault();
+        const card=toggle.closest('[data-v52-card]');
+        card && card.classList.toggle('open');
+        return;
+      }
+      const select=e.target.closest('[data-v52-select]');
+      if(select){
+        e.preventDefault();
+        localStorage.setItem('strideJourneyStage',select.dataset.v52Select);
+        const onboardStage=$('#onboardStage');
+        if(onboardStage) onboardStage.value=select.dataset.v52Select;
+        renderJourney();
+        updateHomeStage();
+        return;
+      }
+    },true);
+  }
+  function rebuildRehabCard(){
+    const card=$('.rehab-card');
+    const history=$('.history-wrap');
+    if(!card||!history) return;
+    card.classList.add('v52-card');
+    card.innerHTML=`
+      <div class="rehab-card-copy">
+        <div class="eyebrow">Understanding Progress</div>
+        <h2 id="rehabCardTitle">Trust the process</h2>
+        <p>Recovery is not always linear. Function can improve before pain fully settles — and that is still meaningful progress.</p>
+      </div>
+      <div class="rehab-chart-wrap">
+        <svg class="rehab-chart" viewBox="0 0 360 242" role="img" aria-label="Illustration showing function improving over time while pain gradually reduces">
+          <line x1="34" y1="24" x2="34" y2="188" class="chart-axis"/>
+          <line x1="34" y1="188" x2="338" y2="188" class="chart-axis"/>
+          <path class="chart-function" d="M42 152 C58 133 74 120 96 107 C118 94 138 86 154 82 C170 78 182 66 196 49 C210 35 226 34 244 30 C264 26 280 29 298 20 C313 13 324 13 332 12"/>
+          <path class="chart-pain" d="M42 112 C60 112 76 118 94 116 C110 114 124 114 138 122 C150 129 164 129 178 118 C190 109 204 112 216 117 C228 123 244 120 257 128 C270 136 284 147 296 154 C310 163 321 177 332 195"/>
+          <line x1="104" y1="56" x2="104" y2="162" class="chart-marker"/>
+          <line x1="194" y1="56" x2="194" y2="138" class="chart-marker"/>
+          <text x="113" y="70" class="chart-note">this is still progress</text>
+          <text x="32" y="208" class="chart-tick">0 weeks</text>
+          <text x="96" y="208" class="chart-tick">4 weeks</text>
+          <text x="168" y="208" class="chart-tick">8 weeks</text>
+          <text x="239" y="208" class="chart-tick">12 weeks</text>
+          <text x="302" y="208" class="chart-tick">16 weeks</text>
+        </svg>
+        <div class="chart-legend"><span><i class="legend-line function"></i>Function</span><span><i class="legend-line pain"></i>Pain</span></div>
+      </div>`;
+    history.after(card);
+  }
+  function enforceOnboardingWidth(){
+    const onboarding=$('#onboarding');
+    if(onboarding){onboarding.style.left='0';onboarding.style.right='0';onboarding.style.width='100%';onboarding.style.transform='none';}
+    const slides=$('#slides');
+    if(slides){slides.style.width='100%';slides.style.transform = slides.style.transform || 'translate3d(0,0,0)';}
+    $$('.slide').forEach(slide=>{slide.style.width='100%';slide.style.minWidth='100%';slide.style.flex='0 0 100%';});
+  }
+  function syncAll(){
+    syncGreeting();
+    syncGoalAndPain();
+    updateHomeStage();
+    renderJourney();
+    rebuildRehabCard();
+    enforceOnboardingWidth();
+  }
+  document.addEventListener('input',function(e){
+    if(e.target && e.target.id==='onboardGoal'){localStorage.setItem('strideGoal',e.target.value);syncGoalAndPain();}
+    if(e.target && (e.target.id==='onboardName' || e.target.id==='profilePreferredName')){localStorage.setItem('strideProfilePreferredName',e.target.value);syncGreeting();}
+  },true);
+  document.addEventListener('click',function(e){
+    const pain=e.target.closest('[data-onboard-pain]');
+    if(pain){setTimeout(syncGoalAndPain,0);}
+    const nav=e.target.closest('.go,[data-go]');
+    if(nav && ((nav.dataset && nav.dataset.go==='home') || nav.getAttribute('data-go')==='home')){setTimeout(syncGreeting,20);}
+  },true);
+  window.addEventListener('storage',syncAll);
+  setInterval(syncGreeting,60000);
+  wireJourney();
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',syncAll); else syncAll();
+})();
+</script>
+
 </body></html>
