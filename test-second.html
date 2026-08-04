@@ -568,6 +568,52 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}
 .v62-compat{display:none!important}
 @media(max-width:360px){.guide-symptoms{grid-template-columns:1fr}}
 
+
+/* v63 layout and onboarding refinements */
+.screen,.screen.active{width:100%;max-width:100%;overflow-x:hidden}
+#journey,#more,#profile,#notifications,#accessibility,#feedback,#about,#privacy,#terms{max-width:100%;overflow-x:hidden}
+#journey .page-head,#more .page-head,#profile .page-head,#notifications .page-head,#accessibility .page-head,#feedback .page-head,#about .page-head,#privacy .page-head,#terms .page-head{padding-left:18px;padding-right:18px}
+.patient-centred-slide{display:flex;flex-direction:column;padding:0;overflow:auto}
+.patient-centred-slide .intro-image{height:38%;min-height:250px;max-height:300px}
+.patient-centred-slide .intro-image img{width:100%;height:100%;object-fit:cover;object-position:center 38%}
+.patient-centred-slide .intro-copy{padding:18px 20px 22px;display:flex;flex-direction:column;gap:12px}
+.patient-centred-slide .slide-count{font-size:13px;color:#7b8794}
+.patient-centred-slide h2{font-size:24px;line-height:1.08;letter-spacing:-.03em;margin:0;color:var(--blue-dark)}
+.patient-centred-slide p{font-size:13px;line-height:1.58;color:var(--muted);margin:0}
+.welcome-purpose-card{padding:14px 15px;border-radius:16px;background:#f5f8fc;border:1px solid #dfe8f1;display:flex;flex-direction:column;gap:6px}
+.welcome-purpose-card strong{font-size:13px;color:var(--blue-dark)}
+.welcome-purpose-card span{font-size:11.5px;line-height:1.5;color:var(--muted)}
+.intro-controls{margin-top:auto;padding-top:10px}
+.v63-feature-slide .guide-options{gap:10px}
+.guide-accordion{width:100%;grid-template-columns:42px 1fr auto;align-items:start;background:#fff}
+.guide-accordion .guide-option-copy{display:block;text-align:left}
+.guide-accordion .guide-option-copy small{display:block;font-size:10.8px;line-height:1.45;color:var(--muted);margin-top:2px}
+.guide-accordion .guide-accordion-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid #e4ebf2;font-size:11px;line-height:1.55;color:#516173}
+.guide-accordion.open{background:#f8fbff;border-color:#cfe0f1}
+.guide-accordion.open .guide-accordion-detail{display:block}
+.guide-accordion .guide-chevron{font-size:16px;color:#90a0b2;line-height:1;align-self:center;transition:transform .2s ease}
+.guide-accordion.open .guide-chevron{transform:rotate(180deg)}
+.guide-slide{padding:20px 20px 24px}
+.guide-slide .guide-progress{margin-bottom:22px}
+.guide-slide h2{font-size:24px}
+.guide-slide>p{font-size:12.5px;margin-bottom:16px}
+.qr-onboard-card{padding:18px 16px;border-radius:18px;border:1px solid #dbe5ef;background:#f8fbff;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.qr-onboard-icon{width:54px;height:54px;border-radius:16px;background:#eaf3ff;color:var(--blue);display:grid;place-items:center}
+.qr-onboard-icon svg{width:24px;height:24px;stroke:currentColor}
+.qr-onboard-card h3{margin:0;font-size:18px;color:var(--blue-dark)}
+.qr-onboard-card p{margin:0;font-size:12px;line-height:1.55;color:var(--muted)}
+.qr-later-link{border:0;background:none;color:var(--blue-dark);text-decoration:underline;font-size:12px;margin-top:10px}
+.ready-guide-slide{justify-content:flex-start}
+.ready-onboard-image{margin:6px auto 12px;max-width:250px}
+.ready-onboard-image img{width:100%;height:auto;border-radius:22px;box-shadow:0 14px 34px rgba(14,42,78,.14)}
+.ready-account-copy{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 14px}
+.guide-account{gap:10px}
+#progress .history-wrap{padding:8px 18px 10px}
+#progress .history-wrap h2{font-size:18px;margin:0 0 12px;color:var(--blue-dark)}
+#progress #checkinHistory{display:grid;gap:12px}
+.guide-field textarea{min-height:84px}
+@media (max-height:800px){.patient-centred-slide .intro-image{min-height:220px;height:34%}.guide-slide{padding-bottom:20px}}
+
 </style>
 </head>
 <body>
@@ -575,7 +621,7 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}
 <section id="home" class="screen active">
   <header class="topbar"><img class="topbar-logo" src="stride-logo.png" alt="Stride by Advanced Podiatry Solutions"><div class="topbar-actions"><button class="icon-button go" data-go="profile" aria-label="Open profile">{{user}}</button></div></header>
   <div class="home-body">
-    <div class="home-hero card"><img src="home-hero.jpg" alt="Hands-on podiatry care"><div class="home-hero-greeting"><h1 id="timeGreeting">Good morning,<br><span id="homeFirstName">Alex</span>!</h1><p>Your care companion between visits.</p></div><div class="home-hero-stage"><div class="hero-phase-kicker">Today in Stride</div><h2 id="homeStageLabel">Active FMT Treatment</h2><p id="homeStageNote">Small steps count. Stride helps you stay on track between visits.</p></div></div>
+    <div class="home-hero card"><img src="home-hero.jpg" alt="Hands-on podiatry care"><div class="home-hero-greeting"><h1 id="timeGreeting">Good morning,<br><span id="homeFirstName">Alex</span>!</h1></div><div class="home-hero-stage"><div class="hero-phase-kicker">Today in Stride</div><h2 id="homeStageLabel">Active FMT Treatment</h2><p id="homeStageNote">Small steps count. Stride helps you stay on track between visits.</p></div></div>
     <div class="motivation-pop card" id="motivationBanner">
       <div class="motivation-icon">{{sparkles}}</div>
       <div class="motivation-copy">
@@ -636,9 +682,7 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}
   </div>
 </div>
 <div class="checkin-card card"><h3>Check-In</h3><p>Record how things are feeling so you can track changes over time.</p><button id="newEntry" class="btn full" type="button">Complete Check-In</button></div>
-<div class="history-wrap"><h2>Recent Check-Ins</h2><div id="checkinHistory"></div></div><div class="history-line"><strong>Better:</strong> Morning stiffness has reduced and walking is more comfortable.</div><div class="history-line"><strong>Still limited:</strong> Stairs remain uncomfortable.</div></div>
-<div class="history-card card"><div class="history-top"><span class="history-date"><strong>28 June 2026</strong></span><span class="pain-pill">Pain 6/10</span></div><div class="history-metrics"><div class="history-metric"><span>Morning</span><strong class="same">Same</strong></div><div class="history-metric"><span>Walking</span><strong>Better</strong></div><div class="history-metric"><span>Shoes</span><strong class="same">Same</strong></div></div><div class="history-line"><strong>Better:</strong> Less heel pain in the afternoon.</div><div class="history-line"><strong>Still limited:</strong> Stiff first thing in the morning.</div></div>
-</div></div>
+<div class="history-wrap"><h2>Recent Check-Ins</h2><div id="checkinHistory"></div></div>
 </section>
 
 <section id="journey" class="screen">
@@ -676,7 +720,7 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}
 
 <section id="feedback" class="screen"><header class="topbar"><img class="topbar-logo" src="stride-logo.png" alt="Stride"><div class="topbar-actions"><button class="icon-button back-button go" data-go="more" aria-label="Back">{{back}}</button></div></header><div class="page-head"><h1>Feedback & Bug Reports</h1><p>Tell us what is not working or what would make Stride more helpful.</p></div><div class="settings-page"><div class="settings-card card feedback-form"><div class="feedback-type-grid"><button class="feedback-type active" data-feedback-type="Bug report">Report a bug</button><button class="feedback-type" data-feedback-type="Feature suggestion">Suggest an improvement</button></div><label for="feedbackSubject">Subject</label><input id="feedbackSubject" placeholder="Briefly describe your feedback"><label for="feedbackMessage">Details</label><textarea id="feedbackMessage" placeholder="Tell us what happened, what you expected, or what you would find helpful."></textarea><label for="feedbackEmail">Your email (optional)</label><input id="feedbackEmail" type="email" placeholder="So we can follow up if needed"><p class="feedback-note">Tapping Send Feedback opens your device's email app with the message addressed to info@advancedpodiatry.co.nz. Please do not include urgent or sensitive medical information.</p><button id="sendFeedback" class="btn full">Send Feedback</button><div id="feedbackSuccess" class="feedback-success">Your email app should now open with the feedback ready to send.</div></div></div></section>
 
-<section id="about" class="screen"><header class="topbar"><img class="topbar-logo" src="stride-logo.png" alt="Stride"><div class="topbar-actions"><button class="icon-button back-button go" data-go="more" aria-label="Back">{{back}}</button></div></header><div class="page-head"><h1>About Stride</h1><p>Your movement and progress companion.</p></div><div class="settings-page"><div class="settings-card card"><h2>Care that keeps you moving.</h2><p>Stride supports patients of Advanced Podiatry Solutions by keeping prescribed resources, progress check-ins, educational information and journey milestones together in one simple place.</p><h3>Important</h3><div class="legal-note">This app supports your care at Advanced Podiatry Solutions but does not replace medical advice. If symptoms worsen or you are concerned, contact the clinic.</div><h3>Clinic</h3><p>Advanced Podiatry Solutions<br>Level 2, 19 Como Street<br>Takapuna, Auckland 0622</p><p style="margin-top:14px;font-size:10px;color:var(--muted)">Prototype build v62</p></div></div></section>
+<section id="about" class="screen"><header class="topbar"><img class="topbar-logo" src="stride-logo.png" alt="Stride"><div class="topbar-actions"><button class="icon-button back-button go" data-go="more" aria-label="Back">{{back}}</button></div></header><div class="page-head"><h1>About Stride</h1><p>Your movement and progress companion.</p></div><div class="settings-page"><div class="settings-card card"><h2>Care that keeps you moving.</h2><p>Stride supports patients of Advanced Podiatry Solutions by keeping prescribed resources, progress check-ins, educational information and journey milestones together in one simple place.</p><h3>Important</h3><div class="legal-note">This app supports your care at Advanced Podiatry Solutions but does not replace medical advice. If symptoms worsen or you are concerned, contact the clinic.</div><h3>Clinic</h3><p>Advanced Podiatry Solutions<br>Level 2, 19 Como Street<br>Takapuna, Auckland 0622</p><p style="margin-top:14px;font-size:10px;color:var(--muted)">Prototype build v63</p></div></div></section>
 
 <section id="privacy" class="screen"><header class="topbar"><img class="topbar-logo" src="stride-logo.png" alt="Stride"><div class="topbar-actions"><button class="icon-button back-button go" data-go="more" aria-label="Back">{{back}}</button></div></header><div class="page-head"><h1>Privacy Policy</h1><p>How Stride collects, uses, stores and protects information.</p></div><div class="settings-page"><div class="settings-card card"><div class="privacy-warning"><strong>Prototype notice:</strong> this demonstration stores information on the current device and is not a production clinical record system. Passwords in this prototype are stored locally for demonstration only. A live release must use secure server-side authentication, password hashing, encryption, access controls, audit logging, backup and breach-response processes before patients use it for clinical information.</div><div class="privacy-section"><h3>Who is responsible</h3><p>Advanced Podiatry Solutions is responsible for information collected through Stride. Privacy questions, access requests, correction requests or complaints can be sent to the clinic Privacy Officer at <a href="mailto:info@advancedpodiatry.co.nz">info@advancedpodiatry.co.nz</a> or 09 212 9250.</p></div><div class="privacy-section"><h3>Information Stride may collect</h3><ul><li>Name, email address and account details.</li><li>Journey phase, goals, starting pain score, check-ins, symptoms, exercise completion and patient-entered notes.</li><li>Prescribed resources added by QR code, notification settings, language and accessibility preferences.</li><li>Technical and security information required to operate and protect a production account, such as login activity, device information and error logs.</li></ul></div><div class="privacy-section"><h3>Why information is collected</h3><p>Information is collected to provide the app, support the patient’s agreed care, display prescribed resources, track self-reported progress, provide reminders, maintain account security, troubleshoot faults and improve Stride. Only information reasonably necessary for those purposes should be collected.</p></div><div class="privacy-section"><h3>Use and disclosure</h3><p>Information should only be used for the purpose it was collected for, or another purpose permitted by the Privacy Act 2020 and Health Information Privacy Code 2020. It is not sold to advertisers. It may be shared with authorised APS team members, contracted technology providers who need it to operate the service, or another party where the patient authorises this or the law permits or requires it.</p></div><div class="privacy-section"><h3>Storage and security</h3><p>A production version must use reasonable safeguards against loss, unauthorised access, use, modification or disclosure. These safeguards should include encrypted transmission, encrypted storage where appropriate, securely hashed passwords, role-based access, multi-factor authentication for administrators, audit logs, secure backups, vulnerability management and staff confidentiality controls.</p></div><div class="privacy-section"><h3>Access, correction and deletion</h3><p>Patients may ask APS for access to personal or health information held about them and request correction where information is inaccurate. Requests will be handled under the Privacy Act and Health Information Privacy Code. Some clinical information may need to be retained under applicable health-record retention requirements even after an account is closed.</p></div><div class="privacy-section"><h3>Retention</h3><p>Information should be retained only for as long as it is lawfully required or needed for the purpose for which it was collected. Clinical health records may be subject to longer legal retention requirements. Non-clinical app preferences and technical logs should use documented retention periods.</p></div><div class="privacy-section"><h3>Overseas services</h3><p>If a production version uses providers that store or process information outside New Zealand, APS must assess those arrangements, explain them to patients where required and ensure appropriate safeguards for overseas disclosure.</p></div><div class="privacy-section"><h3>Privacy breaches</h3><p>APS will assess suspected privacy breaches, contain and investigate them, and notify affected people and the Office of the Privacy Commissioner when legally required.</p></div><div class="privacy-section"><h3>Complaints</h3><p>Patients can raise a concern with APS first. They may also contact the Office of the Privacy Commissioner if they are not satisfied with the response.</p></div><div class="privacy-section"><h3>Last updated</h3><p>4 August 2026. This policy must be reviewed again before any production release or material change to the way Stride handles information.</p></div></div></div></section>
 
@@ -715,8 +759,8 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}
 
 <div id="onboarding" class="onboarding"><div id="slides" class="slides">
 <section class="slide splash"><div class="splash-bg"><img src="onboarding-family-beach.png" alt="Family laughing and running on the beach"></div><div class="splash-content"><img class="splash-logo" src="stride-logo.png" alt="Stride by Advanced Podiatry Solutions"><div class="splash-bottom"><h1 id="welcomeTitle">Ready to move<br>better with Stride?</h1><button id="v62StartOnboarding" class="btn full" type="button">Get Started</button><button class="splash-link" id="v62AccountLink" type="button">I already have an account</button><p class="splash-disclaimer">This app supports your care at Advanced Podiatry Solutions but does not replace medical advice. If symptoms worsen or you are concerned, contact the clinic.</p></div></div></section>
-<section class="slide patient-centred-slide"><div class="intro-image"><img src="intro-patient.png" alt="Podiatrist supporting a patient in clinic"></div><div class="intro-copy"><div class="slide-count">Welcome to Stride</div><h2>Your care journey, all in one place</h2><p>Stride works alongside your care at Advanced Podiatry Solutions, helping you track personal progress, keep prescribed resources close, and learn more about your foot health between appointments.</p><div class="patient-centred-points"><div class="patient-centred-point"><span class="point-icon">{{trend}}</span><div><strong>Track your progress</strong><span>Keep your goal, starting point and check-ins together.</span></div></div><div class="patient-centred-point"><span class="point-icon">{{book}}</span><div><strong>Keep resources close</strong><span>View exercises and information prescribed by your podiatrist.</span></div></div><div class="patient-centred-point"><span class="point-icon">{{map}}</span><div><strong>Learn between visits</strong><span>Follow your APS journey and explore useful foot-health articles.</span></div></div></div><div class="intro-controls"><button id="v62WelcomeNext" class="btn" type="button">Next</button></div></div></section>
-<section class="slide guide-slide welcome-choice-slide"><div class="guide-progress"><span></span><div class="guide-line"><span style="width:20%"></span></div><div class="guide-count">1 of 5</div></div><div class="guide-heading"><span class="eyebrow">Stride features</span><h2>Everything Stride helps you do</h2><p>These tools stay available throughout the app, so you can return to them whenever you need them.</p></div><div class="guide-options refined-options"><div class="guide-option static"><span class="guide-option-icon">{{scan}}</span><span class="guide-option-copy"><strong>Prescribed resources</strong><small>Scan clinic QR codes to add exercises, guides and information from your podiatrist.</small></span></div><div class="guide-option static"><span class="guide-option-icon">{{trend}}</span><span class="guide-option-copy"><strong>Progress tracker</strong><small>Record pain markers and check-ins so you can see changes over time.</small></span></div><div class="guide-option static"><span class="guide-option-icon">{{map}}</span><span class="guide-option-copy"><strong>Your APS journey</strong><small>See your current phase and what to focus on next.</small></span></div><div class="guide-option static"><span class="guide-option-icon">{{book}}</span><span class="guide-option-copy"><strong>Learn</strong><small>Browse articles, guides and helpful foot-health information.</small></span></div></div><div class="guide-safety"><span class="guide-safety-icon">{{info}}</span><p><strong>For your safety</strong>Only complete exercises prescribed or recommended by your podiatrist. Contact the clinic if you are unsure whether an exercise is right for you.</p></div><div class="guide-bottom"><button class="btn" data-v62-next="3" type="button">Next</button></div></section>
+<section class="slide patient-centred-slide v63-welcome-slide"><div class="intro-image"><img src="intro-patient.png" alt="Podiatrist supporting a patient in clinic"></div><div class="intro-copy"><div class="slide-count">Welcome to Stride</div><h2>Your care companion between visits</h2><p>We created Stride to make it easier for APS patients to stay connected with their care between appointments — without needing to remember everything on their own.</p><p>It keeps your prescribed exercises, check-ins, progress and helpful information together in one place, so you can feel more supported throughout your journey with Advanced Podiatry Solutions.</p><div class="welcome-purpose-card"><strong>Why Stride exists</strong><span>To support your progress, keep your prescribed resources close and help you stay on track alongside your podiatrist.</span></div><div class="intro-controls"><button id="v62WelcomeNext" class="btn" type="button">Next</button></div></div></section>
+<section class="slide guide-slide welcome-choice-slide v63-feature-slide"><div class="guide-progress"><span></span><div class="guide-line"><span style="width:20%"></span></div><div class="guide-count">1 of 5</div></div><div class="guide-heading"><span class="eyebrow">Stride features</span><h2>Everything Stride helps you do</h2><p>Tap a card to expand it and see more detail about how each part of Stride can support you.</p></div><div class="guide-options refined-options accordion-options"><button class="guide-option guide-accordion open" type="button"><span class="guide-option-icon">{{scan}}</span><span class="guide-option-copy"><strong>Prescribed resources</strong><small>Scan clinic QR codes to add exercises, guides and information from your podiatrist.</small><span class="guide-accordion-detail">Your prescribed list keeps the exercises and information your podiatrist has specifically recommended for you. This can include exercises, aftercare guides and other support resources.</span></span><span class="guide-chevron">⌄</span></button><button class="guide-option guide-accordion" type="button"><span class="guide-option-icon">{{trend}}</span><span class="guide-option-copy"><strong>Progress tracker</strong><small>Record pain markers and check-ins so you can see changes over time.</small><span class="guide-accordion-detail">You can save your starting point, log check-ins, note what feels better or still limited, and build a clearer picture of how things are changing between visits.</span></span><span class="guide-chevron">⌄</span></button><button class="guide-option guide-accordion" type="button"><span class="guide-option-icon">{{map}}</span><span class="guide-option-copy"><strong>Your APS journey</strong><small>See your current phase and what to focus on next.</small><span class="guide-accordion-detail">The Journey section explains the phases of care and helps you understand what to focus on as you move through your plan with APS.</span></span><span class="guide-chevron">⌄</span></button><button class="guide-option guide-accordion" type="button"><span class="guide-option-icon">{{book}}</span><span class="guide-option-copy"><strong>Learn</strong><small>Browse articles, guides and helpful foot-health information.</small><span class="guide-accordion-detail">The Learn section gives you extra support between visits through simple educational content about foot health, movement and self-management.</span></span><span class="guide-chevron">⌄</span></button></div><div class="guide-safety"><span class="guide-safety-icon">{{info}}</span><p><strong>For your safety</strong> Only complete exercises prescribed or recommended by your podiatrist. Contact the clinic if you are unsure whether an exercise is right for you.</p></div><div class="guide-bottom"><button class="btn" data-v62-next="3" type="button">Next</button></div></section>
 <section class="slide guide-slide"><div class="guide-progress"><button class="guide-back" data-v62-back="2" type="button" aria-label="Back">{{back}}</button><div class="guide-line"><span style="width:40%"></span></div><div class="guide-count">2 of 5</div></div><h2>About you</h2><p>Tell Stride what to call you and where you are in your APS journey.</p><div class="guide-field"><label for="onboardName">Preferred name</label><input id="onboardName" placeholder="e.g. Sarah" autocomplete="given-name"></div><div class="guide-field"><label for="onboardStage">Current journey phase</label><select id="onboardStage"><option value="0">Getting Started</option><option value="1">Foundation Phase</option><option value="2">Maintenance Phase</option><option value="3">Ongoing Support</option></select></div><div class="guide-info">If you have just started with Advanced Podiatry Solutions, or have not been advised to move to another phase, leave this as Getting Started. You can update it later.</div><div class="guide-bottom"><button class="btn" data-v62-next="4" type="button">Continue</button></div></section>
 <section class="slide guide-slide"><div class="guide-progress"><button class="guide-back" data-v62-back="3" type="button" aria-label="Back">{{back}}</button><div class="guide-line"><span style="width:60%"></span></div><div class="guide-count">3 of 5</div></div><h2>Your starting point</h2><p>Enter your goal and record your initial pain marker. These answers will become your first check-in in the Progress tab.</p><div class="guide-field"><label for="onboardGoal">Your goal</label><textarea id="onboardGoal" placeholder="e.g. Walk longer with less pain"></textarea></div><div class="guide-field"><label>Initial pain marker <span style="font-weight:500;color:var(--muted)">(0 = no pain, 10 = worst)</span></label><div id="onboardPain" class="guide-pain"><button type="button" data-v62-pain="0">0</button><button type="button" data-v62-pain="1">1</button><button type="button" data-v62-pain="2">2</button><button type="button" data-v62-pain="3">3</button><button type="button" data-v62-pain="4">4</button><button type="button" data-v62-pain="5">5</button><button type="button" data-v62-pain="6">6</button><button type="button" data-v62-pain="7">7</button><button type="button" data-v62-pain="8">8</button><button type="button" data-v62-pain="9">9</button><button type="button" data-v62-pain="10">10</button></div><div id="onboardPainSelected" class="onboarding-choice-note">Not selected yet</div></div><div class="guide-field"><label>How often are you noticing symptoms?</label><div class="guide-symptoms"><button type="button" data-v62-symptom="Most days">Most days</button><button type="button" data-v62-symptom="Some days">Some days</button><button type="button" data-v62-symptom="Occasionally">Occasionally</button></div></div><div class="guide-info">Your goal, initial pain marker and symptom frequency will be saved into your Progress page and check-in history.</div><div class="guide-bottom"><button class="btn" data-v62-next="5" type="button">Continue</button></div></section>
 <section class="slide guide-slide"><div class="guide-progress"><button class="guide-back" data-v62-back="4" type="button" aria-label="Back">{{back}}</button><div class="guide-line"><span style="width:80%"></span></div><div class="guide-count">4 of 5</div></div><h2>Add your prescribed resources</h2><p>Scan a QR code supplied by your podiatrist to add prescribed exercises, guides or information directly to Stride.</p><div class="qr-onboard-card"><div class="qr-onboard-icon">{{scan}}</div><h3>Scan your Stride QR code</h3><p>Each scan adds the corresponding prescribed resource to this device and, where applicable, to your Daily Snapshot checklist.</p><button id="v62ScanQr" type="button" class="btn">Open QR Scanner</button></div><div class="guide-info">Only exercises appear in the Daily Snapshot. Guides and information remain available in the Exercise and Resource Library.</div><div class="guide-bottom"><button class="btn" data-v62-next="6" type="button">Continue</button><button class="qr-later-link" data-v62-next="6" type="button">Add resources later</button></div></section>
@@ -1293,6 +1337,52 @@ renderMyResources();renderLibrary();bindResourceButtons();
   .journey-v52-action{border:1px solid #cdd8e5;background:#fff;color:var(--navy);border-radius:999px;padding:9px 12px;font-size:11px;font-weight:800}
   .journey-v52-action.current{background:#eaf1f8;color:var(--navy);border-color:#d5e0ec}
   .journey-v52-action:hover{background:#f4f8fd}
+
+/* v63 layout and onboarding refinements */
+.screen,.screen.active{width:100%;max-width:100%;overflow-x:hidden}
+#journey,#more,#profile,#notifications,#accessibility,#feedback,#about,#privacy,#terms{max-width:100%;overflow-x:hidden}
+#journey .page-head,#more .page-head,#profile .page-head,#notifications .page-head,#accessibility .page-head,#feedback .page-head,#about .page-head,#privacy .page-head,#terms .page-head{padding-left:18px;padding-right:18px}
+.patient-centred-slide{display:flex;flex-direction:column;padding:0;overflow:auto}
+.patient-centred-slide .intro-image{height:38%;min-height:250px;max-height:300px}
+.patient-centred-slide .intro-image img{width:100%;height:100%;object-fit:cover;object-position:center 38%}
+.patient-centred-slide .intro-copy{padding:18px 20px 22px;display:flex;flex-direction:column;gap:12px}
+.patient-centred-slide .slide-count{font-size:13px;color:#7b8794}
+.patient-centred-slide h2{font-size:24px;line-height:1.08;letter-spacing:-.03em;margin:0;color:var(--blue-dark)}
+.patient-centred-slide p{font-size:13px;line-height:1.58;color:var(--muted);margin:0}
+.welcome-purpose-card{padding:14px 15px;border-radius:16px;background:#f5f8fc;border:1px solid #dfe8f1;display:flex;flex-direction:column;gap:6px}
+.welcome-purpose-card strong{font-size:13px;color:var(--blue-dark)}
+.welcome-purpose-card span{font-size:11.5px;line-height:1.5;color:var(--muted)}
+.intro-controls{margin-top:auto;padding-top:10px}
+.v63-feature-slide .guide-options{gap:10px}
+.guide-accordion{width:100%;grid-template-columns:42px 1fr auto;align-items:start;background:#fff}
+.guide-accordion .guide-option-copy{display:block;text-align:left}
+.guide-accordion .guide-option-copy small{display:block;font-size:10.8px;line-height:1.45;color:var(--muted);margin-top:2px}
+.guide-accordion .guide-accordion-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid #e4ebf2;font-size:11px;line-height:1.55;color:#516173}
+.guide-accordion.open{background:#f8fbff;border-color:#cfe0f1}
+.guide-accordion.open .guide-accordion-detail{display:block}
+.guide-accordion .guide-chevron{font-size:16px;color:#90a0b2;line-height:1;align-self:center;transition:transform .2s ease}
+.guide-accordion.open .guide-chevron{transform:rotate(180deg)}
+.guide-slide{padding:20px 20px 24px}
+.guide-slide .guide-progress{margin-bottom:22px}
+.guide-slide h2{font-size:24px}
+.guide-slide>p{font-size:12.5px;margin-bottom:16px}
+.qr-onboard-card{padding:18px 16px;border-radius:18px;border:1px solid #dbe5ef;background:#f8fbff;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.qr-onboard-icon{width:54px;height:54px;border-radius:16px;background:#eaf3ff;color:var(--blue);display:grid;place-items:center}
+.qr-onboard-icon svg{width:24px;height:24px;stroke:currentColor}
+.qr-onboard-card h3{margin:0;font-size:18px;color:var(--blue-dark)}
+.qr-onboard-card p{margin:0;font-size:12px;line-height:1.55;color:var(--muted)}
+.qr-later-link{border:0;background:none;color:var(--blue-dark);text-decoration:underline;font-size:12px;margin-top:10px}
+.ready-guide-slide{justify-content:flex-start}
+.ready-onboard-image{margin:6px auto 12px;max-width:250px}
+.ready-onboard-image img{width:100%;height:auto;border-radius:22px;box-shadow:0 14px 34px rgba(14,42,78,.14)}
+.ready-account-copy{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 14px}
+.guide-account{gap:10px}
+#progress .history-wrap{padding:8px 18px 10px}
+#progress .history-wrap h2{font-size:18px;margin:0 0 12px;color:var(--blue-dark)}
+#progress #checkinHistory{display:grid;gap:12px}
+.guide-field textarea{min-height:84px}
+@media (max-height:800px){.patient-centred-slide .intro-image{min-height:220px;height:34%}.guide-slide{padding-bottom:20px}}
+
 </style>
 <script id="v52-script">
 (function(){
@@ -1533,6 +1623,52 @@ renderMyResources();renderLibrary();bindResourceButtons();
 .journey-v53-footer{display:flex;justify-content:flex-end;margin-top:12px}
 .journey-v53-select{border:1px solid #cad7e4;border-radius:999px;background:#fff;color:var(--navy);padding:8px 12px;font-size:10.5px;font-weight:800}
 .journey-v53-current{display:inline-flex;border-radius:999px;background:#e8f0f8;color:var(--navy);padding:8px 12px;font-size:10.5px;font-weight:800}
+
+/* v63 layout and onboarding refinements */
+.screen,.screen.active{width:100%;max-width:100%;overflow-x:hidden}
+#journey,#more,#profile,#notifications,#accessibility,#feedback,#about,#privacy,#terms{max-width:100%;overflow-x:hidden}
+#journey .page-head,#more .page-head,#profile .page-head,#notifications .page-head,#accessibility .page-head,#feedback .page-head,#about .page-head,#privacy .page-head,#terms .page-head{padding-left:18px;padding-right:18px}
+.patient-centred-slide{display:flex;flex-direction:column;padding:0;overflow:auto}
+.patient-centred-slide .intro-image{height:38%;min-height:250px;max-height:300px}
+.patient-centred-slide .intro-image img{width:100%;height:100%;object-fit:cover;object-position:center 38%}
+.patient-centred-slide .intro-copy{padding:18px 20px 22px;display:flex;flex-direction:column;gap:12px}
+.patient-centred-slide .slide-count{font-size:13px;color:#7b8794}
+.patient-centred-slide h2{font-size:24px;line-height:1.08;letter-spacing:-.03em;margin:0;color:var(--blue-dark)}
+.patient-centred-slide p{font-size:13px;line-height:1.58;color:var(--muted);margin:0}
+.welcome-purpose-card{padding:14px 15px;border-radius:16px;background:#f5f8fc;border:1px solid #dfe8f1;display:flex;flex-direction:column;gap:6px}
+.welcome-purpose-card strong{font-size:13px;color:var(--blue-dark)}
+.welcome-purpose-card span{font-size:11.5px;line-height:1.5;color:var(--muted)}
+.intro-controls{margin-top:auto;padding-top:10px}
+.v63-feature-slide .guide-options{gap:10px}
+.guide-accordion{width:100%;grid-template-columns:42px 1fr auto;align-items:start;background:#fff}
+.guide-accordion .guide-option-copy{display:block;text-align:left}
+.guide-accordion .guide-option-copy small{display:block;font-size:10.8px;line-height:1.45;color:var(--muted);margin-top:2px}
+.guide-accordion .guide-accordion-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid #e4ebf2;font-size:11px;line-height:1.55;color:#516173}
+.guide-accordion.open{background:#f8fbff;border-color:#cfe0f1}
+.guide-accordion.open .guide-accordion-detail{display:block}
+.guide-accordion .guide-chevron{font-size:16px;color:#90a0b2;line-height:1;align-self:center;transition:transform .2s ease}
+.guide-accordion.open .guide-chevron{transform:rotate(180deg)}
+.guide-slide{padding:20px 20px 24px}
+.guide-slide .guide-progress{margin-bottom:22px}
+.guide-slide h2{font-size:24px}
+.guide-slide>p{font-size:12.5px;margin-bottom:16px}
+.qr-onboard-card{padding:18px 16px;border-radius:18px;border:1px solid #dbe5ef;background:#f8fbff;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.qr-onboard-icon{width:54px;height:54px;border-radius:16px;background:#eaf3ff;color:var(--blue);display:grid;place-items:center}
+.qr-onboard-icon svg{width:24px;height:24px;stroke:currentColor}
+.qr-onboard-card h3{margin:0;font-size:18px;color:var(--blue-dark)}
+.qr-onboard-card p{margin:0;font-size:12px;line-height:1.55;color:var(--muted)}
+.qr-later-link{border:0;background:none;color:var(--blue-dark);text-decoration:underline;font-size:12px;margin-top:10px}
+.ready-guide-slide{justify-content:flex-start}
+.ready-onboard-image{margin:6px auto 12px;max-width:250px}
+.ready-onboard-image img{width:100%;height:auto;border-radius:22px;box-shadow:0 14px 34px rgba(14,42,78,.14)}
+.ready-account-copy{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 14px}
+.guide-account{gap:10px}
+#progress .history-wrap{padding:8px 18px 10px}
+#progress .history-wrap h2{font-size:18px;margin:0 0 12px;color:var(--blue-dark)}
+#progress #checkinHistory{display:grid;gap:12px}
+.guide-field textarea{min-height:84px}
+@media (max-height:800px){.patient-centred-slide .intro-image{min-height:220px;height:34%}.guide-slide{padding-bottom:20px}}
+
 </style>
 <script id="v53-script">
 (function(){
@@ -1707,6 +1843,52 @@ renderMyResources();renderLibrary();bindResourceButtons();
   #fmtVideoModal.modal{align-items:flex-start!important;padding-top:12px!important}
   #fmtVideoModal .modal-sheet{max-height:calc(100dvh - 24px)!important}
 }
+
+/* v63 layout and onboarding refinements */
+.screen,.screen.active{width:100%;max-width:100%;overflow-x:hidden}
+#journey,#more,#profile,#notifications,#accessibility,#feedback,#about,#privacy,#terms{max-width:100%;overflow-x:hidden}
+#journey .page-head,#more .page-head,#profile .page-head,#notifications .page-head,#accessibility .page-head,#feedback .page-head,#about .page-head,#privacy .page-head,#terms .page-head{padding-left:18px;padding-right:18px}
+.patient-centred-slide{display:flex;flex-direction:column;padding:0;overflow:auto}
+.patient-centred-slide .intro-image{height:38%;min-height:250px;max-height:300px}
+.patient-centred-slide .intro-image img{width:100%;height:100%;object-fit:cover;object-position:center 38%}
+.patient-centred-slide .intro-copy{padding:18px 20px 22px;display:flex;flex-direction:column;gap:12px}
+.patient-centred-slide .slide-count{font-size:13px;color:#7b8794}
+.patient-centred-slide h2{font-size:24px;line-height:1.08;letter-spacing:-.03em;margin:0;color:var(--blue-dark)}
+.patient-centred-slide p{font-size:13px;line-height:1.58;color:var(--muted);margin:0}
+.welcome-purpose-card{padding:14px 15px;border-radius:16px;background:#f5f8fc;border:1px solid #dfe8f1;display:flex;flex-direction:column;gap:6px}
+.welcome-purpose-card strong{font-size:13px;color:var(--blue-dark)}
+.welcome-purpose-card span{font-size:11.5px;line-height:1.5;color:var(--muted)}
+.intro-controls{margin-top:auto;padding-top:10px}
+.v63-feature-slide .guide-options{gap:10px}
+.guide-accordion{width:100%;grid-template-columns:42px 1fr auto;align-items:start;background:#fff}
+.guide-accordion .guide-option-copy{display:block;text-align:left}
+.guide-accordion .guide-option-copy small{display:block;font-size:10.8px;line-height:1.45;color:var(--muted);margin-top:2px}
+.guide-accordion .guide-accordion-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid #e4ebf2;font-size:11px;line-height:1.55;color:#516173}
+.guide-accordion.open{background:#f8fbff;border-color:#cfe0f1}
+.guide-accordion.open .guide-accordion-detail{display:block}
+.guide-accordion .guide-chevron{font-size:16px;color:#90a0b2;line-height:1;align-self:center;transition:transform .2s ease}
+.guide-accordion.open .guide-chevron{transform:rotate(180deg)}
+.guide-slide{padding:20px 20px 24px}
+.guide-slide .guide-progress{margin-bottom:22px}
+.guide-slide h2{font-size:24px}
+.guide-slide>p{font-size:12.5px;margin-bottom:16px}
+.qr-onboard-card{padding:18px 16px;border-radius:18px;border:1px solid #dbe5ef;background:#f8fbff;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.qr-onboard-icon{width:54px;height:54px;border-radius:16px;background:#eaf3ff;color:var(--blue);display:grid;place-items:center}
+.qr-onboard-icon svg{width:24px;height:24px;stroke:currentColor}
+.qr-onboard-card h3{margin:0;font-size:18px;color:var(--blue-dark)}
+.qr-onboard-card p{margin:0;font-size:12px;line-height:1.55;color:var(--muted)}
+.qr-later-link{border:0;background:none;color:var(--blue-dark);text-decoration:underline;font-size:12px;margin-top:10px}
+.ready-guide-slide{justify-content:flex-start}
+.ready-onboard-image{margin:6px auto 12px;max-width:250px}
+.ready-onboard-image img{width:100%;height:auto;border-radius:22px;box-shadow:0 14px 34px rgba(14,42,78,.14)}
+.ready-account-copy{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 14px}
+.guide-account{gap:10px}
+#progress .history-wrap{padding:8px 18px 10px}
+#progress .history-wrap h2{font-size:18px;margin:0 0 12px;color:var(--blue-dark)}
+#progress #checkinHistory{display:grid;gap:12px}
+.guide-field textarea{min-height:84px}
+@media (max-height:800px){.patient-centred-slide .intro-image{min-height:220px;height:34%}.guide-slide{padding-bottom:20px}}
+
 </style>
 <script id="v54-layout-script">
 (function(){
@@ -1766,6 +1948,52 @@ renderMyResources();renderLibrary();bindResourceButtons();
   height:100%!important;
   box-sizing:border-box!important;
 }
+
+/* v63 layout and onboarding refinements */
+.screen,.screen.active{width:100%;max-width:100%;overflow-x:hidden}
+#journey,#more,#profile,#notifications,#accessibility,#feedback,#about,#privacy,#terms{max-width:100%;overflow-x:hidden}
+#journey .page-head,#more .page-head,#profile .page-head,#notifications .page-head,#accessibility .page-head,#feedback .page-head,#about .page-head,#privacy .page-head,#terms .page-head{padding-left:18px;padding-right:18px}
+.patient-centred-slide{display:flex;flex-direction:column;padding:0;overflow:auto}
+.patient-centred-slide .intro-image{height:38%;min-height:250px;max-height:300px}
+.patient-centred-slide .intro-image img{width:100%;height:100%;object-fit:cover;object-position:center 38%}
+.patient-centred-slide .intro-copy{padding:18px 20px 22px;display:flex;flex-direction:column;gap:12px}
+.patient-centred-slide .slide-count{font-size:13px;color:#7b8794}
+.patient-centred-slide h2{font-size:24px;line-height:1.08;letter-spacing:-.03em;margin:0;color:var(--blue-dark)}
+.patient-centred-slide p{font-size:13px;line-height:1.58;color:var(--muted);margin:0}
+.welcome-purpose-card{padding:14px 15px;border-radius:16px;background:#f5f8fc;border:1px solid #dfe8f1;display:flex;flex-direction:column;gap:6px}
+.welcome-purpose-card strong{font-size:13px;color:var(--blue-dark)}
+.welcome-purpose-card span{font-size:11.5px;line-height:1.5;color:var(--muted)}
+.intro-controls{margin-top:auto;padding-top:10px}
+.v63-feature-slide .guide-options{gap:10px}
+.guide-accordion{width:100%;grid-template-columns:42px 1fr auto;align-items:start;background:#fff}
+.guide-accordion .guide-option-copy{display:block;text-align:left}
+.guide-accordion .guide-option-copy small{display:block;font-size:10.8px;line-height:1.45;color:var(--muted);margin-top:2px}
+.guide-accordion .guide-accordion-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid #e4ebf2;font-size:11px;line-height:1.55;color:#516173}
+.guide-accordion.open{background:#f8fbff;border-color:#cfe0f1}
+.guide-accordion.open .guide-accordion-detail{display:block}
+.guide-accordion .guide-chevron{font-size:16px;color:#90a0b2;line-height:1;align-self:center;transition:transform .2s ease}
+.guide-accordion.open .guide-chevron{transform:rotate(180deg)}
+.guide-slide{padding:20px 20px 24px}
+.guide-slide .guide-progress{margin-bottom:22px}
+.guide-slide h2{font-size:24px}
+.guide-slide>p{font-size:12.5px;margin-bottom:16px}
+.qr-onboard-card{padding:18px 16px;border-radius:18px;border:1px solid #dbe5ef;background:#f8fbff;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.qr-onboard-icon{width:54px;height:54px;border-radius:16px;background:#eaf3ff;color:var(--blue);display:grid;place-items:center}
+.qr-onboard-icon svg{width:24px;height:24px;stroke:currentColor}
+.qr-onboard-card h3{margin:0;font-size:18px;color:var(--blue-dark)}
+.qr-onboard-card p{margin:0;font-size:12px;line-height:1.55;color:var(--muted)}
+.qr-later-link{border:0;background:none;color:var(--blue-dark);text-decoration:underline;font-size:12px;margin-top:10px}
+.ready-guide-slide{justify-content:flex-start}
+.ready-onboard-image{margin:6px auto 12px;max-width:250px}
+.ready-onboard-image img{width:100%;height:auto;border-radius:22px;box-shadow:0 14px 34px rgba(14,42,78,.14)}
+.ready-account-copy{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 14px}
+.guide-account{gap:10px}
+#progress .history-wrap{padding:8px 18px 10px}
+#progress .history-wrap h2{font-size:18px;margin:0 0 12px;color:var(--blue-dark)}
+#progress #checkinHistory{display:grid;gap:12px}
+.guide-field textarea{min-height:84px}
+@media (max-height:800px){.patient-centred-slide .intro-image{min-height:220px;height:34%}.guide-slide{padding-bottom:20px}}
+
 </style>
 <script id="v55-onboarding-track-script">
 (function(){
@@ -1795,7 +2023,144 @@ renderMyResources();renderLibrary();bindResourceButtons();
 })();
 </script>
 
-<script>localStorage.removeItem("strideOnboardingComplete"); document.getElementById("onboarding")?.classList.remove("hidden"); document.getElementById("slides").style.transform="translateX(-100%)";</script><script id="v62-stable-controller">
+
+<style id="v56-onboarding-no-carousel">
+/* Final onboarding fix: use one visible page at a time instead of translating a carousel. */
+#onboarding.onboarding{
+  position:fixed!important;
+  top:0!important;
+  bottom:0!important;
+  left:50%!important;
+  right:auto!important;
+  width:min(430px,100vw)!important;
+  max-width:min(430px,100vw)!important;
+  height:100dvh!important;
+  transform:translateX(-50%)!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  box-sizing:border-box!important;
+  contain:none!important;
+}
+#onboarding #slides{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+  transform:none!important;
+  transition:none!important;
+}
+#onboarding .slide{
+  position:absolute!important;
+  inset:0!important;
+  display:none!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:100%!important;
+  flex:none!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  box-sizing:border-box!important;
+  background:#fff!important;
+  scrollbar-width:none!important;
+}
+#onboarding .slide::-webkit-scrollbar{display:none!important}
+#onboarding .slide.v56-active{display:flex!important}
+#onboarding .slide.splash.v56-active{display:flex!important;overflow:hidden!important}
+#onboarding .patient-centred-slide.v56-active,
+#onboarding .guide-slide.v56-active{display:flex!important}
+
+/* v63 layout and onboarding refinements */
+.screen,.screen.active{width:100%;max-width:100%;overflow-x:hidden}
+#journey,#more,#profile,#notifications,#accessibility,#feedback,#about,#privacy,#terms{max-width:100%;overflow-x:hidden}
+#journey .page-head,#more .page-head,#profile .page-head,#notifications .page-head,#accessibility .page-head,#feedback .page-head,#about .page-head,#privacy .page-head,#terms .page-head{padding-left:18px;padding-right:18px}
+.patient-centred-slide{display:flex;flex-direction:column;padding:0;overflow:auto}
+.patient-centred-slide .intro-image{height:38%;min-height:250px;max-height:300px}
+.patient-centred-slide .intro-image img{width:100%;height:100%;object-fit:cover;object-position:center 38%}
+.patient-centred-slide .intro-copy{padding:18px 20px 22px;display:flex;flex-direction:column;gap:12px}
+.patient-centred-slide .slide-count{font-size:13px;color:#7b8794}
+.patient-centred-slide h2{font-size:24px;line-height:1.08;letter-spacing:-.03em;margin:0;color:var(--blue-dark)}
+.patient-centred-slide p{font-size:13px;line-height:1.58;color:var(--muted);margin:0}
+.welcome-purpose-card{padding:14px 15px;border-radius:16px;background:#f5f8fc;border:1px solid #dfe8f1;display:flex;flex-direction:column;gap:6px}
+.welcome-purpose-card strong{font-size:13px;color:var(--blue-dark)}
+.welcome-purpose-card span{font-size:11.5px;line-height:1.5;color:var(--muted)}
+.intro-controls{margin-top:auto;padding-top:10px}
+.v63-feature-slide .guide-options{gap:10px}
+.guide-accordion{width:100%;grid-template-columns:42px 1fr auto;align-items:start;background:#fff}
+.guide-accordion .guide-option-copy{display:block;text-align:left}
+.guide-accordion .guide-option-copy small{display:block;font-size:10.8px;line-height:1.45;color:var(--muted);margin-top:2px}
+.guide-accordion .guide-accordion-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid #e4ebf2;font-size:11px;line-height:1.55;color:#516173}
+.guide-accordion.open{background:#f8fbff;border-color:#cfe0f1}
+.guide-accordion.open .guide-accordion-detail{display:block}
+.guide-accordion .guide-chevron{font-size:16px;color:#90a0b2;line-height:1;align-self:center;transition:transform .2s ease}
+.guide-accordion.open .guide-chevron{transform:rotate(180deg)}
+.guide-slide{padding:20px 20px 24px}
+.guide-slide .guide-progress{margin-bottom:22px}
+.guide-slide h2{font-size:24px}
+.guide-slide>p{font-size:12.5px;margin-bottom:16px}
+.qr-onboard-card{padding:18px 16px;border-radius:18px;border:1px solid #dbe5ef;background:#f8fbff;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.qr-onboard-icon{width:54px;height:54px;border-radius:16px;background:#eaf3ff;color:var(--blue);display:grid;place-items:center}
+.qr-onboard-icon svg{width:24px;height:24px;stroke:currentColor}
+.qr-onboard-card h3{margin:0;font-size:18px;color:var(--blue-dark)}
+.qr-onboard-card p{margin:0;font-size:12px;line-height:1.55;color:var(--muted)}
+.qr-later-link{border:0;background:none;color:var(--blue-dark);text-decoration:underline;font-size:12px;margin-top:10px}
+.ready-guide-slide{justify-content:flex-start}
+.ready-onboard-image{margin:6px auto 12px;max-width:250px}
+.ready-onboard-image img{width:100%;height:auto;border-radius:22px;box-shadow:0 14px 34px rgba(14,42,78,.14)}
+.ready-account-copy{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 14px}
+.guide-account{gap:10px}
+#progress .history-wrap{padding:8px 18px 10px}
+#progress .history-wrap h2{font-size:18px;margin:0 0 12px;color:var(--blue-dark)}
+#progress #checkinHistory{display:grid;gap:12px}
+.guide-field textarea{min-height:84px}
+@media (max-height:800px){.patient-centred-slide .intro-image{min-height:220px;height:34%}.guide-slide{padding-bottom:20px}}
+
+</style>
+<script id="v56-onboarding-no-carousel-script">
+(function(){
+  const onboarding=document.getElementById('onboarding');
+  const track=document.getElementById('slides');
+  if(!onboarding||!track)return;
+  const pages=Array.from(track.querySelectorAll(':scope > .slide'));
+  function showPage(index){
+    const safe=Math.max(0,Math.min(pages.length-1,Number(index)||0));
+    pages.forEach((page,i)=>{
+      page.classList.toggle('v56-active',i===safe);
+      page.setAttribute('aria-hidden',i===safe?'false':'true');
+      if(i===safe)page.scrollTop=0;
+    });
+    track.style.transform='none';
+    onboarding.scrollTop=0;
+    window.strideOnboardingPage=safe;
+  }
+  window.strideOnboardGo=showPage;
+  window.strideOnboardNext=function(index){showPage(index)};
+  document.addEventListener('click',function(event){
+    const target=event.target.closest('button,a');
+    if(!target||!target.closest('#onboarding'))return;
+    let handled=true;
+    if(target.id==='startOnboarding')showPage(1);
+    else if(target.id==='continueToSetup'||target.id==='skipPatientIntro')showPage(2);
+    else if(target.classList.contains('onboard-next'))showPage(Number(target.dataset.nextStep));
+    else if(target.hasAttribute('data-back-step'))showPage(Number(target.dataset.backStep));
+    else if(target.id==='finishOnboarding'){
+      try{localStorage.setItem('strideOnboardingComplete','true')}catch(e){}
+      onboarding.classList.add('hidden');
+    }
+    else handled=false;
+    if(handled){
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+    }
+  },true);
+  showPage(0);
+})();
+</script>
+
+<script id="v62-stable-controller">
 (function(){
   const VERSION='62';
   const onboarding=document.getElementById('onboarding');
@@ -1903,4 +2268,30 @@ renderMyResources();renderLibrary();bindResourceButtons();
   if(shouldShow){onboarding?.classList.remove('hidden');showPage(0)}else onboarding?.classList.add('hidden');
 })();
 </script>
+
+<script id="v63-controller">
+(function(){
+  const VERSION='63';
+  const $=id=>document.getElementById(id);
+  function bindFeatureAccordions(){document.querySelectorAll('.guide-accordion').forEach(btn=>{btn.addEventListener('click',()=>btn.classList.toggle('open'))})}
+  function setLibraryAddState(){const btn=$('saveResource');const notice=document.querySelector('#detail .notice');if(!btn||typeof currentResource==='undefined')return;if(currentResourceSource==='library'){btn.textContent=saved.has(currentResource.id)?'Already in prescribed resources':'Add to prescribed resources';btn.disabled=saved.has(currentResource.id);if(notice)notice.innerHTML='Only add resources to your prescribed list if they have been recommended or prescribed by your podiatrist. The library is there for education, but your prescribed list should reflect what has been recommended for you.';}else{btn.textContent=saved.has(currentResource.id)?'Update prescribed resource':'Add to My Resources';btn.disabled=false;if(notice)notice.innerHTML='Only perform exercises or use techniques that have been prescribed and demonstrated by your podiatrist. Resources support your agreed care plan and do not replace individual advice.';}}
+  function attachDetailAddBehaviour(){if(typeof openResource==='function'){const originalOpen=openResource;window.openResource=function(id,source='library'){const result=originalOpen(id,source);setTimeout(setLibraryAddState,0);return result}}$('saveResource')?.addEventListener('click',function(event){if(typeof currentResource==='undefined')return;if(currentResourceSource==='library'){event.preventDefault();event.stopImmediatePropagation();if(!saved.has(currentResource.id)){saved.add(currentResource.id);localStorage.setItem('stridePrescribedResources',JSON.stringify([...saved]));}if(typeof renderMyResources==='function')renderMyResources();if(typeof renderLibrary==='function')renderLibrary();if(typeof renderDailySnapshot==='function')renderDailySnapshot();showScreen('resources');document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x.dataset.tab==='prescribed'));$('prescribedPanel')?.classList.add('active');$('libraryPanel')?.classList.remove('active');}},true)}
+  function cleanupProgressArtifacts(){document.querySelectorAll('#progress > .history-line, #progress > .history-card').forEach(el=>el.remove())}
+  function dailyLogKey(){return 'strideDailyLogV63'}
+  function getDailyLog(){try{return JSON.parse(localStorage.getItem(dailyLogKey())||'{}')}catch(e){return {}}}
+  function setDailyLog(log){try{localStorage.setItem(dailyLogKey(),JSON.stringify(log))}catch(e){}}
+  function recordTodayConsistency(){const prescribed=(typeof resources!=='undefined'&&typeof saved!=='undefined')?resources.filter(item=>saved.has(item.id)&&item.type==='exercise'):[];const total=prescribed.length;const done=(typeof completed!=='undefined'&&completed instanceof Set)?completed.size:0;const key=new Date().toISOString().slice(0,10);const log=getDailyLog();log[key]={date:key,total,done};setDailyLog(log)}
+  function monthlyConsistency(){const log=getDailyLog();const today=new Date();let done=0,total=0;Object.values(log).forEach(entry=>{if(!entry||!entry.date)return;const diff=(today-new Date(entry.date+'T00:00:00'))/86400000;if(diff>=0&&diff<30&&Number(entry.total)>0){done+=Number(entry.done)||0;total+=Number(entry.total)||0}});const percent=total?Math.round((done/total)*100):0;let label='Not started',note='Start checking off your prescribed exercises and Stride will build a monthly consistency picture.';if(percent>=90){label='Excellent';note='You have been highly consistent with your prescribed exercises over the last month.'}else if(percent>=70){label='Strong';note='You have been checking off most of your prescribed exercises consistently over the last month.'}else if(percent>=40){label='Building';note='You are building consistency. Aim for more regular check-offs to reflect your routine.'}else if(total>0){label='Low';note='Exercise check-offs have been limited over the last month. Discuss any barriers with your podiatrist.'}return {percent,label,note}}
+  function updateMonthlyConsistencyUI(){recordTodayConsistency();const data=monthlyConsistency();const label=$('summaryConsistency'),bar=$('summaryConsistencyBar'),note=$('summaryConsistencyNote');if(label)label.textContent=data.label;if(bar)bar.style.width=data.percent+'%';if(note)note.textContent=data.note}
+  function addLibraryButtons(){document.querySelectorAll('#libraryList .resource-card').forEach(card=>{if(card.querySelector('.resource-quick-add'))return;const id=card.dataset.id;const right=card.querySelector('.chevron');const btn=document.createElement('button');btn.type='button';btn.className='resource-quick-add';btn.dataset.id=id;btn.textContent=(typeof saved!=='undefined'&&saved.has(id))?'Added':'Add';btn.style.cssText='position:absolute;right:34px;bottom:12px;border:1px solid #d7e2ec;background:#fff;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:800;color:var(--blue-dark)';if(typeof saved!=='undefined'&&saved.has(id)){btn.disabled=true;btn.style.opacity='0.6'}card.appendChild(btn);if(right){right.style.marginBottom='18px';}})}
+  document.addEventListener('click',function(event){const libAdd=event.target.closest('.resource-quick-add');if(libAdd){event.preventDefault();event.stopPropagation();const id=libAdd.dataset.id;if(id&&typeof saved!=='undefined'){if(!saved.has(id))saved.add(id);localStorage.setItem('stridePrescribedResources',JSON.stringify([...saved]));typeof renderLibrary==='function'&&renderLibrary();typeof renderMyResources==='function'&&renderMyResources();typeof renderDailySnapshot==='function'&&renderDailySnapshot();}}},true);
+  if(typeof renderLibrary==='function'){const originalRenderLibrary=renderLibrary;window.renderLibrary=function(){const res=originalRenderLibrary.apply(this,arguments);addLibraryButtons();return res}}
+  if(typeof renderDailySnapshot==='function'){const original=renderDailySnapshot;window.renderDailySnapshot=function(){const res=original.apply(this,arguments);updateMonthlyConsistencyUI();return res}}
+  $('openSummary')?.addEventListener('click',()=>setTimeout(updateMonthlyConsistencyUI,0));
+  document.addEventListener('click',function(e){if(e.target.closest('[data-v62-daily]'))setTimeout(updateMonthlyConsistencyUI,0);if(e.target.closest('#saveEntry'))setTimeout(updateMonthlyConsistencyUI,50)},true);
+  bindFeatureAccordions();cleanupProgressArtifacts();attachDetailAddBehaviour();addLibraryButtons();updateMonthlyConsistencyUI();
+  try{if(localStorage.getItem('strideOnboardingVersion')!==VERSION){localStorage.removeItem('strideOnboardingComplete')}}catch(e){}
+})();
+</script>
+
 </body></html>
