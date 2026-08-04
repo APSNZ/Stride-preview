@@ -1,0 +1,16 @@
+Stride prototype build v61
+
+Included updates:
+- Revised navy and green onboarding screens and corrected onboarding images
+- No skip option on the welcome page
+- Static Stride features page
+- Manual goal, initial pain marker and symptom-frequency starting check-in
+- Initial check-in transferred to Progress history
+- Improved account/continue-without-account final screen
+- Daily Snapshot linked only to QR-added prescribed exercises
+- Empty Daily Snapshot directs patients to Resources
+- Three exercises visible at once; additional exercises scroll inside the card
+- Exercise completion count includes all prescribed exercises
+- Resources page titled Exercise and Resource Library
+- Build-aware onboarding reset and Restart onboarding control
+- Unique v61 onboarding image filenames and cache-control metadata
