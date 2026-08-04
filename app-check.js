@@ -137,7 +137,7 @@ const summaryModal=document.getElementById('summaryModal');
 function updateSummaryModal(){const c=latestCheckin;summaryLatestPain.textContent=`${c.pain}/10`;summaryImprovement.textContent=`${c.improvement}%`;summaryConsistency.textContent=c.consistency;const widths={Always:100,Mostly:82,Sometimes:55,Rarely:25};summaryConsistencyBar.style.width=(widths[c.consistency]||60)+'%';summaryConsistencyNote.textContent=c.consistency==='Always'?'Excellent consistency — you are completing your exercises very regularly.':c.consistency==='Mostly'?'You have been consistent with most prescribed exercises. Keep building on this routine.':c.consistency==='Sometimes'?'You are completing some exercises. A more regular routine may help support progress.':'Exercise consistency has been limited. Discuss any barriers with your podiatrist.';const readable=v=>v==='Better'?'Improving':v==='Worse'?'More limited':'About the same';summaryMorning.textContent=readable(c.morning);summaryWalking.textContent=readable(c.walking);summaryShoes.textContent=readable(c.shoes);summaryFlares.textContent=c.flare==='Yes'?'Flare-ups reported':'None reported';summaryNarrative.textContent=`${c.better?'What feels better: '+c.better+'. ':''}${c.limited?'What still feels limited: '+c.limited+'. ':''}Pain is currently ${c.pain}/10 and overall improvement is estimated at ${c.improvement}%.`;}
 openSummary.addEventListener('click',()=>{updateSummaryModal();summaryModal.classList.add('open')});document.querySelector('.close-summary').addEventListener('click',()=>summaryModal.classList.remove('open'));summaryModal.addEventListener('click',e=>{if(e.target===summaryModal)summaryModal.classList.remove('open')});
 function summaryText(){const c=latestCheckin;return `Stride progress summary: pain ${c.pain}/10; overall improvement ${c.improvement}%; exercise consistency ${c.consistency.toLowerCase()}; morning stiffness ${c.morning.toLowerCase()}; walking tolerance ${c.walking.toLowerCase()}; shoe comfort ${c.shoes.toLowerCase()}; flare-ups ${c.flare.toLowerCase()}. ${c.better?'Better: '+c.better+'. ':''}${c.limited?'Still limited: '+c.limited+'.':''}`}
-copyProgressSummary.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(summaryText());copyProgressSummary.textContent='Copied';setTimeout(()=>copyProgressSummary.textContent='Copy Summary',1200)}catch(e){alert(summaryText())}});shareProgressSummary.addEventListener('click',async()=>{const t=summaryText();if(navigator.share){try{await navigator.share({title:'Stride Progress Summary',text:t})}catch(e){}}else{try{await navigator.clipboard.writeText(t);alert('Summary copied.')}catch(e){alert(t)}}});
+copyProgressSummary.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(summaryText());copyProgressSummary.textContent='Copied';setTimeout(()=>copyProgressSummary.textContent='Copy Summary',1200)}catch(e){alert(summaryText())}});if(window.shareProgressSummary){shareProgressSummary.addEventListener('click',()=>{})}
 
 const journeyStages=[
 {name:'Getting Started',weeks:'Weeks 1–4',description:'Your initial assessment and initial adjustment are complete. Early FMT sessions focus on loosening restrictions and helping the foot and ankle joints move more freely.',fmt:'Loosen restrictions and begin getting the foot and ankle joints moving.',patient:'Complete prescribed exercises, attend FMT consistently, and notice patterns in symptoms and activity.',milestone:'Initial assessment and initial adjustment completed.',note:'You have taken the first important step. Focus on consistency and noticing how your movement responds.'},
@@ -337,4 +337,134 @@ renderMyResources();renderLibrary();bindResourceButtons();
     if(target.id==='finishOnboarding'){e.preventDefault();save();try{localStorage.setItem('strideOnboardingComplete','true')}catch(err){}var o=document.getElementById('onboarding');if(o)o.classList.add('hidden');return;}
     if(target.id==='accountLink'){e.preventDefault();if(typeof openAccountModal==='function')openAccountModal('signin');else{var m=document.getElementById('accountModal');if(m)m.classList.add('open');}return;}
   },true);
+})();
+</script>
+
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const journeyStagesV47=[
+    {name:'Getting Started',weeks:'Weeks 1–4',note:'You are building your foundation. Focus on your exercises, regular appointments and noticing how your symptoms respond.',description:'Your initial assessment and initial adjustment are complete. Early FMT sessions focus on creating movement and helping you understand your symptoms.',fmt:'Loosen restrictions and begin getting the foot and ankle joints moving.',patient:'Complete prescribed exercises, attend FMT consistently, and notice patterns in your symptoms and activity.',milestone:'Initial assessment and initial adjustment completed.'},
+    {name:'Foundation Phase',weeks:'Weeks 5–8',note:'Keep building consistency. Your podiatrist is reinforcing movement changes and introducing strength and control.',description:'After your progress review, FMT usually becomes less frequent while the gains made during the first month are reinforced.',fmt:'Maintain changes, keep joints mobile, introduce strengthening, and work on surrounding structures.',patient:'Continue prescribed exercises and stay consistent with appointments and healthy movement habits.',milestone:'Progress Review completed around Week 5 and your plan updated.'},
+    {name:'Maintenance Phase',weeks:'Weeks 9–13',note:'You are moving toward greater self-management while your podiatrist monitors that progress is holding.',description:'Regular FMT sessions are gradually reduced while your podiatrist checks that movement is holding and there is no regression.',fmt:'Wean from regular FMT, monitor for regression, and progress self-management tools.',patient:'Keep up prescribed exercises, use your self-management tools, and attend planned reviews.',milestone:'90-day review completed and long-term recommendations confirmed.'},
+    {name:'Ongoing Support',weeks:'After 90 days',note:'Your structured phase is complete. Continue your tools and arrange periodic support when needed.',description:'The structured 90-day phase is complete and you are ready to self-manage, with support available whenever you need it.',fmt:'Periodic review of movement, symptoms, exercises and any new concerns.',patient:'Continue exercises and book a review if symptoms change. Many patients prefer an FMT check every 6–12 months.',milestone:'Maintaining progress independently without regular sessions.'}
+  ];
+  window.journeyStages=journeyStagesV47;
+  function currentStage(){return Math.min(3,Math.max(0,Number(localStorage.getItem('strideJourneyStage')||0)));}
+  function syncJourney(){
+    const idx=currentStage(),s=journeyStagesV47[idx];
+    if($('homeStageLabel')) $('homeStageLabel').textContent=s.name;
+    if($('homeStageNote')) $('homeStageNote').textContent=s.note;
+    if($('onboardStage')) $('onboardStage').value=String(idx);
+    if($('summaryPhase')) $('summaryPhase').textContent=s.name;
+    renderJourney();
+    updateMotivation();
+  }
+  function renderJourney(){
+    const host=$('journeyPhaseList'); if(!host)return;
+    const idx=currentStage();
+    host.innerHTML=journeyStagesV47.map((s,i)=>`<article class="phase-card ${i===idx?'current open':''} ${i<idx?'completed':''}" data-stage="${i}"><button class="phase-header" type="button"><span class="phase-icon">${i<idx?'✓':i+1}</span><span><span class="phase-weeks">${s.weeks}</span><span class="phase-title">${s.name}</span></span><span class="phase-status">${i<idx?'Completed':i===idx?'Current':'Select'}</span></button><div class="phase-details"><p>${s.description}</p><div class="detail-row"><strong>FMT focus</strong><span>${s.fmt}</span></div><div class="detail-row"><strong>Your focus</strong><span>${s.patient}</span></div><div class="detail-row"><strong>Milestone</strong><span>${s.milestone}</span></div><button class="btn secondary phase-select" type="button" data-select-stage="${i}">${i===idx?'Current phase':'Select this phase'}</button></div></article>`).join('');
+  }
+  const phaseMotivation=[
+    ['You have taken the first important step.','Focus on consistency, your prescribed exercises and noticing small changes.'],
+    ['Keep building on your early progress.','Regular movement and your exercises help reinforce the changes made during FMT.'],
+    ['Your self-management tools matter now.','Keep using your exercises and check in with how your movement is holding.'],
+    ['Keep moving with confidence.','Use the tools you have built and arrange a review if symptoms return or change.']
+  ];
+  function updateMotivation(){const m=phaseMotivation[currentStage()];if($('motivationText'))$('motivationText').textContent=m[0];if($('motivationSubtext'))$('motivationSubtext').textContent=m[1];}
+  function saveStage(i){localStorage.setItem('strideJourneyStage',String(i));syncJourney();}
+  function updateSnapshot(){
+    let done=0;document.querySelectorAll('[data-daily-exercise]').forEach(btn=>{const key='strideDaily-'+new Date().toISOString().slice(0,10)+'-'+btn.dataset.dailyExercise;const yes=localStorage.getItem(key)==='true';btn.setAttribute('aria-pressed',String(yes));btn.querySelector('.status-circle')?.classList.toggle('done',yes);if(yes)done++;});
+    if($('snapshotCount'))$('snapshotCount').textContent=`${done} of 3 completed`;const fill=document.querySelector('.snapshot .progress-fill');if(fill)fill.style.width=(done/3*100)+'%';
+  }
+  function openModal(id){const m=$(id);if(m){m.classList.add('open');m.setAttribute('aria-hidden','false');}}
+  function closeModal(id){const m=$(id);if(m){m.classList.remove('open');m.setAttribute('aria-hidden','true');}}
+  function summaryData(){
+    const checks=JSON.parse(localStorage.getItem('strideCheckins')||'[]');const latest=checks[0]||null;
+    if($('summaryStartPain'))$('summaryStartPain').textContent=(localStorage.getItem('strideInitialPain')??'Not recorded')+(localStorage.getItem('strideInitialPain')!==null?'/10':'');
+    if($('summaryLatestPain'))$('summaryLatestPain').textContent=latest?latest.pain+'/10':'No check-in yet';
+    if($('summaryConsistency'))$('summaryConsistency').textContent=latest?.consistency||'Not recorded';
+    if($('summaryGoal'))$('summaryGoal').textContent=localStorage.getItem('strideGoal')||'Move more comfortably and confidently.';
+    if($('summaryRecent'))$('summaryRecent').textContent=latest?`${latest.morning} morning stiffness, ${latest.walking} walking tolerance, ${latest.shoes} shoe comfort. ${latest.better?'Better: '+latest.better+'. ':''}${latest.limited?'Still limited: '+latest.limited+'.':''}`:'Complete a check-in to build your summary.';
+    syncJourney();
+  }
+  document.addEventListener('click',function(e){
+    const t=e.target.closest('button,[data-select-stage],[data-daily-exercise]');if(!t)return;
+    if(t.matches('[data-select-stage]')){e.preventDefault();e.stopPropagation();saveStage(Number(t.dataset.selectStage));return;}
+    if(t.classList.contains('phase-header')){e.preventDefault();t.closest('.phase-card')?.classList.toggle('open');return;}
+    if(t.matches('[data-daily-exercise]')){e.preventDefault();const key='strideDaily-'+new Date().toISOString().slice(0,10)+'-'+t.dataset.dailyExercise;localStorage.setItem(key,String(localStorage.getItem(key)!=='true'));updateSnapshot();return;}
+    if(t.id==='dismissMotivation'){e.preventDefault();$('motivationBanner')?.classList.add('hidden');return;}
+    if(t.id==='newEntry'){e.preventDefault();openModal('progressModal');return;}
+    if(t.id==='openSummary'){e.preventDefault();summaryData();openModal('summaryModal');return;}
+    if(t.id==='closeSummary'){e.preventDefault();closeModal('summaryModal');return;}
+    if(t.classList.contains('close-progress')){e.preventDefault();closeModal('progressModal');return;}
+    if(t.id==='closeFmtVideo'){e.preventDefault();closeModal('fmtVideoModal');return;}
+  },true);
+  document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id)}));
+  // Store check-ins for automatic summary, while preserving existing UI handling.
+  $('saveEntry')?.addEventListener('click',()=>{setTimeout(()=>{try{const rec={date:new Date().toISOString(),pain:Number(window.selectedPain||5),morning:document.querySelector('[data-group="morning"] .selected')?.dataset.value||'Same',walking:document.querySelector('[data-group="walking"] .selected')?.dataset.value||'Same',shoes:document.querySelector('[data-group="shoes"] .selected')?.dataset.value||'Same',flare:document.querySelector('[data-group="flare"] .selected')?.dataset.value||'No',consistency:document.querySelector('[data-group="consistency"] .selected')?.dataset.value||'Mostly',better:$('betterInput')?.value||'',limited:$('limitedInput')?.value||''};const arr=JSON.parse(localStorage.getItem('strideCheckins')||'[]');arr.unshift(rec);localStorage.setItem('strideCheckins',JSON.stringify(arr.slice(0,20)));}catch(_){ }},0)},true);
+  $('copyProgressSummary')?.addEventListener('click',async()=>{summaryData();const txt=`Stride progress summary\nPhase: ${$('summaryPhase')?.textContent}\nGoal: ${$('summaryGoal')?.textContent}\nStarting pain: ${$('summaryStartPain')?.textContent}\nLatest pain: ${$('summaryLatestPain')?.textContent}\nExercise consistency: ${$('summaryConsistency')?.textContent}\nRecent changes: ${$('summaryRecent')?.textContent}`;try{await navigator.clipboard.writeText(txt);$('copyProgressSummary').textContent='Copied';setTimeout(()=>$('copyProgressSummary').textContent='Copy Summary',1200)}catch(_){alert(txt)}});
+  // Text sizing applies globally through root rem scaling.
+  const savedSize=localStorage.getItem('strideTextSize')||'standard';document.documentElement.dataset.textSize=savedSize;document.querySelectorAll('.text-size-button').forEach(b=>{b.classList.toggle('active',b.dataset.size===savedSize);b.addEventListener('click',()=>{localStorage.setItem('strideTextSize',b.dataset.size);document.documentElement.dataset.textSize=b.dataset.size;document.querySelectorAll('.text-size-button').forEach(x=>x.classList.toggle('active',x===b));})});
+  // Read aloud.
+  $('readPageAloud')?.addEventListener('click',()=>{if(!('speechSynthesis'in window)){if($('ttsStatus'))$('ttsStatus').textContent='Text-to-speech is not available in this browser.';return;}speechSynthesis.cancel();const active=document.querySelector('.screen.active');const utter=new SpeechSynthesisUtterance((active?.innerText||'').replace(/\s+/g,' ').trim());utter.lang=document.documentElement.lang||'en-NZ';utter.onstart=()=>{if($('ttsStatus'))$('ttsStatus').textContent='Reading this page aloud…'};utter.onend=()=>{if($('ttsStatus'))$('ttsStatus').textContent='Finished reading.'};speechSynthesis.speak(utter)});
+  $('stopReading')?.addEventListener('click',()=>{if('speechSynthesis'in window)speechSynthesis.cancel();if($('ttsStatus'))$('ttsStatus').textContent='Reading stopped.'});
+  // Embedded video: set STRIDE_FMT_VIDEO_URL to a YouTube/Vimeo embed URL or MP4 URL in production.
+  const STRIDE_FMT_VIDEO_URL='';
+  if(STRIDE_FMT_VIDEO_URL&&$('fmtVideoEmbed')){$('fmtVideoEmbed').innerHTML=/\.(mp4|webm)(\?|$)/i.test(STRIDE_FMT_VIDEO_URL)?`<video controls playsinline src="${STRIDE_FMT_VIDEO_URL}"></video>`:`<iframe src="${STRIDE_FMT_VIDEO_URL}" title="What is Foot Mobilisation Therapy?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;}
+  updateSnapshot();syncJourney();summaryData();
+})();
+</script>
+
+
+<script>
+(function(){
+  const $=(q,r=document)=>r.querySelector(q), $$=(q,r=document)=>Array.from(r.querySelectorAll(q));
+  function closeModal(el){if(!el)return;el.classList.remove('open');el.setAttribute('aria-hidden','true');}
+  function openModal(el){if(!el)return;el.classList.add('open');el.setAttribute('aria-hidden','false');}
+  // Capture-phase modal controls ensure close and choice buttons always work.
+  document.addEventListener('click',function(e){
+    const close=e.target.closest('.close-progress,.close-summary,#closeFmtVideo');
+    if(close){e.preventDefault();e.stopPropagation();closeModal(close.closest('.modal'));return;}
+    const modal=e.target.classList.contains('modal')?e.target:null;if(modal){closeModal(modal);return;}
+    const choice=e.target.closest('#progressModal .number-choice,#progressModal .percent-choice,#progressModal .pill-choice');
+    if(choice){e.preventDefault();e.stopPropagation();const parent=choice.parentElement;parent.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));choice.classList.add('selected');return;}
+  },true);
+  // Daily snapshot completion.
+  const dayKey=new Date().toISOString().slice(0,10), storageKey='strideDaily-'+dayKey;
+  let completed=new Set(JSON.parse(localStorage.getItem(storageKey)||'[]'));
+  function renderDaily(){const rows=$$('[data-daily-exercise]');rows.forEach(row=>row.setAttribute('aria-pressed',completed.has(row.dataset.dailyExercise)?'true':'false'));const count=$('#snapshotCount');if(count)count.textContent=`${completed.size} of ${rows.length} completed`;const fill=$('.snapshot .progress-fill');if(fill)fill.style.width=(rows.length?completed.size/rows.length*100:0)+'%';}
+  $$('[data-daily-exercise]').forEach(row=>row.addEventListener('click',function(e){e.preventDefault();const id=this.dataset.dailyExercise;completed.has(id)?completed.delete(id):completed.add(id);localStorage.setItem(storageKey,JSON.stringify([...completed]));renderDaily();}));renderDaily();
+  // Phase-specific, closeable motivation.
+  const stageMessages=[
+    ['A strong start begins with consistency.','Focus on your prescribed exercises, appointments and noticing small changes.'],
+    ['Keep building on your early progress.','Your regular exercises help reinforce the movement gained during this phase.'],
+    ['Your self-management tools matter now.','Keep using your exercises and check in with how your movement is holding.'],
+    ['Keep supporting the progress you have made.','Use your exercises and arrange a review if symptoms begin to change.']
+  ];
+  function updateMotivation(index){const m=stageMessages[index]||stageMessages[0];const t=$('#motivationText'),s=$('#motivationSubtext');if(t)t.textContent=m[0];if(s)s.textContent=m[1];}
+  const dismiss=$('#dismissMotivation');if(dismiss)dismiss.addEventListener('click',e=>{e.preventDefault();$('#motivationBanner')?.classList.add('hidden')});
+  // Rebuild Journey as a simple selectable list.
+  const phases=[
+    {name:'Getting Started',weeks:'Weeks 1–4',desc:'Your initial assessment and initial adjustment are complete. Early FMT sessions focus on loosening restrictions and helping the foot and ankle joints move more freely.'},
+    {name:'Foundation Phase',weeks:'Weeks 5–8',desc:'After your progress review, FMT usually becomes less frequent while early changes are reinforced and strengthening is introduced.'},
+    {name:'Maintenance Phase',weeks:'Weeks 9–13',desc:'Regular FMT sessions are gradually reduced while your podiatrist checks that movement is holding and supports self-management.'},
+    {name:'Ongoing Support',weeks:'After 90 days',desc:'The structured phase is complete. Continue your exercises and arrange periodic reviews or support when needed.'}
+  ];
+  function currentStage(){return Math.max(0,Math.min(3,Number(localStorage.getItem('strideJourneyStage')||0)));}
+  function renderJourney(){const list=$('#journeyPhaseList');if(!list)return;const current=currentStage();list.innerHTML=phases.map((p,i)=>`<article class="journey-phase-simple ${i<current?'completed':''} ${i===current?'current open':''}" data-phase="${i}"><button class="journey-phase-button" type="button"><span class="journey-phase-number">${i<current?'✓':i+1}</span><span class="journey-phase-copy"><small>${p.weeks}</small><strong>${p.name}</strong></span><span class="journey-phase-state">${i<current?'Completed':i===current?'Current':'Upcoming'}</span></button><div class="journey-phase-detail"><p>${p.desc}</p><button class="btn secondary phase-select" type="button" data-v48-phase="${i}">${i===current?'Current phase':'Set as current phase'}</button></div></article>`).join('');
+    const label=$('#journeyProgressLabel'),percent=$('#journeyProgressPercent'),fill=$('#journeyProgressFill');if(label)label.textContent=phases[current].name;if(percent)percent.textContent=((current+1)*25)+'%';if(fill)fill.style.width=((current+1)*25)+'%';
+    const homeLabel=$('#homeStageLabel'),homeNote=$('#homeStageNote');if(homeLabel)homeLabel.textContent=phases[current].name;if(homeNote)homeNote.textContent=stageMessages[current][1];updateMotivation(current);
+  }
+  document.addEventListener('click',function(e){const header=e.target.closest('.journey-phase-button');if(header){e.preventDefault();header.closest('.journey-phase-simple').classList.toggle('open');return;}const set=e.target.closest('[data-v48-phase]');if(set){e.preventDefault();e.stopPropagation();localStorage.setItem('strideJourneyStage',set.dataset.v48Phase);const onboard=$('#onboardStage');if(onboard)onboard.value=set.dataset.v48Phase;renderJourney();}});
+  renderJourney();
+  // Ensure progress modal and summary open reliably.
+  $('#newEntry')?.addEventListener('click',e=>{e.preventDefault();openModal($('#progressModal'))});
+  $('#openSummary')?.addEventListener('click',e=>{e.preventDefault();openModal($('#summaryModal'))});
+  // Ensure FMT player opens.
+  $('#openFmtVideo')?.addEventListener('click',e=>{e.preventDefault();openModal($('#fmtVideoModal'))});
+  // Entire-app text scaling.
+  function applyScale(size){document.documentElement.dataset.textSize=size;localStorage.setItem('strideTextSize',size);$$('.text-size-button').forEach(b=>b.classList.toggle('active',b.dataset.size===size));}
+  $$('.text-size-button').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();applyScale(b.dataset.size)}));applyScale(localStorage.getItem('strideTextSize')||'standard');
 })();

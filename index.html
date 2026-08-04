@@ -530,6 +530,20 @@ html[data-text-size="small"] body{zoom:.9}html[data-text-size="standard"] body{z
   .patient-centred-slide .intro-controls{position:relative;margin-top:12px}
 }
 
+
+/* v51 final refinements */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+.app{width:100%;max-width:430px}
+.onboarding{width:100%!important;max-width:430px!important;overflow-x:hidden!important}
+.slides,.slide{width:100%;max-width:100%}.slide{min-width:100%;overflow-x:hidden}
+.home-hero:after{background:linear-gradient(180deg,rgba(4,35,67,.18) 0%,rgba(4,35,67,.04) 48%,rgba(4,35,67,.62) 100%)!important}
+.home-hero-stage{left:18px!important;right:18px!important;bottom:15px!important;width:auto!important;max-width:none!important;padding:0!important;background:transparent!important;backdrop-filter:none!important;border-radius:0!important;text-shadow:0 2px 10px rgba(0,0,0,.42)}
+.home-hero-stage h2{font-size:1.22rem!important;margin:3px 0 5px!important}.home-hero-stage p{max-width:100%!important;font-size:.74rem!important;line-height:1.4!important}
+.rehab-card{margin:14px 18px;padding:17px;background:#f7f9fc}.rehab-card-copy h2{font-size:20px;margin:4px 0 6px;color:var(--navy)}.rehab-card-copy p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}.rehab-chart-wrap{margin-top:12px;background:#fff;border:1px solid #e1e8f0;border-radius:16px;padding:10px}.rehab-chart{display:block;width:100%;height:auto}.chart-axis{stroke:#0a5f9e;stroke-width:2}.chart-function{fill:none;stroke:#119fe3;stroke-width:4;stroke-linecap:round}.chart-pain{fill:none;stroke:#c70b13;stroke-width:4;stroke-linecap:round}.chart-marker{stroke:#1773ad;stroke-width:2;stroke-dasharray:5 4}.chart-note{font-size:11px;fill:#667085}.chart-tick{font-size:9px;fill:#344054}.chart-legend{display:flex;justify-content:center;gap:26px;font-size:11px;color:#344054;margin-top:4px}.chart-legend span{display:flex;align-items:center;gap:7px}.legend-line{display:inline-block;width:26px;height:3px;border-radius:99px}.legend-line.function{background:#119fe3}.legend-line.pain{background:#c70b13}
+.journey-progress-card{margin:0 18px 16px}.journey-list-heading{padding:4px 18px 10px}.journey-list-heading h2{font-size:20px;margin:4px 0 5px}.journey-list-heading p{font-size:12px;line-height:1.45;color:var(--muted);margin:0}
+#journeyPhaseList{padding:0 18px 28px}.journey-clean-card{border:1px solid #dfe7ef;border-radius:18px;background:#fff;margin-bottom:11px;overflow:hidden;box-shadow:0 7px 18px rgba(8,47,91,.045)}.journey-clean-card.current{border:2px solid var(--navy);background:#f7faff}.journey-clean-card.completed{border-color:#cfe8d7}.journey-clean-head{width:100%;border:0;background:transparent;padding:14px;display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:11px;align-items:center;text-align:left}.journey-clean-index{width:40px;height:40px;border-radius:13px;background:#eef3f8;color:var(--navy);display:grid;place-items:center;font-weight:850}.journey-clean-card.completed .journey-clean-index{background:#e7f7ec;color:#168a4a}.journey-clean-card.current .journey-clean-index{background:var(--navy);color:#fff}.journey-clean-copy small{display:block;color:var(--muted);font-size:10px;margin-bottom:3px}.journey-clean-copy strong{display:block;color:var(--navy);font-size:14px;line-height:1.22}.journey-clean-state{font-size:9px;font-weight:800;padding:5px 8px;border-radius:999px;background:#eef3f8;color:#64748b}.journey-clean-card.completed .journey-clean-state{background:#e7f7ec;color:#168a4a}.journey-clean-card.current .journey-clean-state{background:var(--navy);color:#fff}.journey-clean-detail{display:none;padding:0 14px 14px 65px}.journey-clean-card.open .journey-clean-detail{display:block}.journey-clean-detail p{font-size:11.5px;line-height:1.5;color:var(--muted);margin:0 0 11px}.journey-clean-detail .btn{width:100%;min-height:42px}
+.learn-featured{padding:0 18px 16px}.learn-search{padding-top:2px}
+
 </style>
 </head>
 <body>
@@ -582,8 +596,23 @@ html[data-text-size="small"] body{zoom:.9}html[data-text-size="standard"] body{z
 
 <section id="progress" class="screen">
 <header class="topbar"><img class="topbar-logo" src="stride-logo.png" alt="Stride"><div class="topbar-actions"><button class="icon-button go" data-go="profile" aria-label="Open profile">{{user}}</button></div></header>
-<div class="progress-head"><div><h1 data-i18n="progressTitle">Progress</h1><p>Keep your check-ins simple and easy to follow.</p></div><button id="openSummary" class="btn secondary summary-open">View Summary</button></div>
-<div id="progressGoalCard" class="goal-card card"><div class="eyebrow">Your Goal</div><strong id="progressGoalText">Move more comfortably and confidently.</strong><p>Starting pain: <span id="progressInitialPain">Not recorded</span></p></div><div class="checkin-card card"><h3>Check-In</h3><p>Record how things are feeling so you can track changes over time.</p><button id="newEntry" class="btn full">Complete Check-In</button></div>
+<div class="progress-head"><div><h1 data-i18n="progressTitle">Progress</h1><p>Keep track of the changes that matter to you.</p></div><button id="openSummary" class="btn secondary summary-open" type="button">View Summary</button></div>
+<div id="progressGoalCard" class="goal-card card"><div class="eyebrow">Your Goal</div><strong id="progressGoalText">Move more comfortably and confidently.</strong><p>Starting pain: <span id="progressInitialPain">Not recorded</span></p></div>
+<div class="rehab-card card" aria-labelledby="rehabCardTitle">
+  <div class="rehab-card-copy"><div class="eyebrow">Understanding Progress</div><h2 id="rehabCardTitle">Trust the process</h2><p>Recovery is not always linear. Function may improve before pain fully settles — and that is still meaningful progress.</p></div>
+  <div class="rehab-chart-wrap">
+    <svg class="rehab-chart" viewBox="0 0 360 220" role="img" aria-label="Illustration showing function improving over time while pain gradually reduces">
+      <line x1="34" y1="18" x2="34" y2="185" class="chart-axis"/><line x1="34" y1="185" x2="344" y2="185" class="chart-axis"/>
+      <path class="chart-function" d="M40 160 C68 132 82 126 104 112 S144 92 158 82 S176 44 206 40 S244 36 258 24 S305 14 334 10"/>
+      <path class="chart-pain" d="M40 110 C72 108 83 119 101 118 S130 111 150 121 S179 126 194 117 S222 120 239 119 S264 132 278 143 S304 153 318 173 S329 186 337 194"/>
+      <line x1="112" y1="54" x2="112" y2="159" class="chart-marker"/><line x1="205" y1="52" x2="205" y2="124" class="chart-marker"/>
+      <text x="122" y="67" class="chart-note">this is still progress</text>
+      <text x="34" y="207" class="chart-tick">0 weeks</text><text x="128" y="207" class="chart-tick">4 weeks</text><text x="222" y="207" class="chart-tick">8 weeks</text><text x="305" y="207" class="chart-tick">12+</text>
+    </svg>
+    <div class="chart-legend"><span><i class="legend-line function"></i>Function</span><span><i class="legend-line pain"></i>Pain</span></div>
+  </div>
+</div>
+<div class="checkin-card card"><h3>Check-In</h3><p>Record how things are feeling so you can track changes over time.</p><button id="newEntry" class="btn full" type="button">Complete Check-In</button></div>
 <div class="history-wrap"><h2>Recent Check-Ins</h2><div id="checkinHistory">
 <div class="history-card card"><div class="history-top"><span class="history-date"><strong>5 July 2026</strong></span><span class="pain-pill">Pain 5/10</span></div><div class="history-metrics"><div class="history-metric"><span>Morning</span><strong>Better</strong></div><div class="history-metric"><span>Walking</span><strong>Better</strong></div><div class="history-metric"><span>Shoes</span><strong class="same">Same</strong></div></div><div class="history-line"><strong>Better:</strong> Morning stiffness has reduced and walking is more comfortable.</div><div class="history-line"><strong>Still limited:</strong> Stairs remain uncomfortable.</div></div>
 <div class="history-card card"><div class="history-top"><span class="history-date"><strong>28 June 2026</strong></span><span class="pain-pill">Pain 6/10</span></div><div class="history-metrics"><div class="history-metric"><span>Morning</span><strong class="same">Same</strong></div><div class="history-metric"><span>Walking</span><strong>Better</strong></div><div class="history-metric"><span>Shoes</span><strong class="same">Same</strong></div></div><div class="history-line"><strong>Better:</strong> Less heel pain in the afternoon.</div><div class="history-line"><strong>Still limited:</strong> Stiff first thing in the morning.</div></div>
@@ -592,10 +621,15 @@ html[data-text-size="small"] body{zoom:.9}html[data-text-size="standard"] body{z
 
 <section id="journey" class="screen">
 <header class="topbar"><img class="topbar-logo" src="stride-logo.png" alt="Stride"><div class="topbar-actions"><button class="icon-button go" data-go="profile" aria-label="Open profile">{{user}}</button></div></header>
-<div class="page-head"><h1 data-i18n="journeyTitle">My Journey</h1><p>Your 90-day Foot Mobilisation Therapy journey.</p></div>
-<div id="journeyGoalCard" class="goal-card card"><div class="eyebrow">Your Goal</div><strong id="journeyGoalText">Move more comfortably and confidently.</strong><p>Use this goal to guide your exercises and progress check-ins.</p></div><div class="journey-progress-card card"><div class="journey-progress-top"><div><div class="eyebrow">Journey Progress</div><strong id="journeyProgressLabel">Getting Started</strong></div><span id="journeyProgressPercent">25%</span></div><div class="journey-progress-track"><div id="journeyProgressFill"></div></div><p>Select a phase below when your podiatrist advises you to move forward.</p></div><div class="journey-list-heading"><div><div class="eyebrow">Your Journey</div><h2>Select your current phase</h2><p>Your phases are listed in order. Tap a phase to view it, then select it as your current phase.</p></div></div><div id="journeyPhaseList" class="phase-list"></div></section>
+<div class="page-head"><h1 data-i18n="journeyTitle">My Journey</h1><p>Your journey towards moving better with Advanced Podiatry Solutions.</p></div>
+<div class="journey-progress-card card"><div class="journey-progress-top"><div><div class="eyebrow">Journey Progress</div><strong id="journeyProgressLabel">Getting Started</strong></div><span id="journeyProgressPercent">25%</span></div><div class="journey-progress-track"><div id="journeyProgressFill"></div></div><p>Select a phase when your podiatrist advises you to move forward.</p></div>
+<div class="journey-list-heading"><div><div class="eyebrow">Your Journey</div><h2>Choose your current phase</h2><p>Tap a phase to see more, then select it when it matches where you are now.</p></div></div>
+<div id="journeyPhaseList" class="phase-list"></div>
+</section>
 
-<section id="learn" class="screen"><header class="topbar"><img class="topbar-logo" src="stride-logo.png" alt="Stride"><div class="topbar-actions"><button class="icon-button back-button go" data-go="more" aria-label="Back">{{back}}</button></div></header><div class="page-head"><h1>Learn</h1><p>Helpful articles and patient education from Advanced Podiatry Solutions.</p></div><div class="search-wrap"><input type="search" placeholder="Search articles"></div><div class="filter-row"><button class="filter active">All</button><button class="filter">Foot Health</button><button class="filter">Movement</button><button class="filter">Lifestyle</button></div><div class="article-list"><div class="article-card card"><img src="learn-foot.jpg" alt="Healthy feet"><div><h3>5 Tips for Healthier Feet</h3><p>Simple steps you can take every day.</p></div></div><div class="article-card card"><img src="resource-foot.png" alt="Foot health"><div><h3>Plantar Fasciitis: What You Need to Know</h3><p>Causes, symptoms and how we can help.</p></div></div><div class="article-card card"><img src="resource-ankle.png" alt="Footwear"><div><h3>Choosing the Right Shoes for Your Feet</h3><p>Support your feet with the right fit.</p></div></div></div></section>
+<section id="learn" class="screen"><header class="topbar"><img class="topbar-logo" src="stride-logo.png" alt="Stride"><div class="topbar-actions"><button class="icon-button back-button go" data-go="more" aria-label="Back">{{back}}</button></div></header><div class="page-head"><h1>Learn</h1><p>Helpful videos and patient education from Advanced Podiatry Solutions.</p></div>
+<div class="learn-featured"><button class="fmt-video-card fmt-video-trigger" type="button" aria-label="Watch What is Foot Mobilisation Therapy"><img src="intro-patient.png" alt="Podiatrist providing hands-on foot care"><span class="fmt-play">{{play}}</span><div class="fmt-video-copy"><div class="fmt-video-kicker">Featured video</div><h3>What is Foot Mobilisation Therapy?</h3><p>Learn how FMT supports movement, function and your wider plan with APS.</p></div></button></div>
+<div class="search-wrap learn-search"><input type="search" placeholder="Search articles"></div><div class="filter-row"><button class="filter active">All</button><button class="filter">Foot Health</button><button class="filter">Movement</button><button class="filter">Lifestyle</button></div><div class="article-list"><div class="article-card card"><img src="learn-foot.jpg" alt="Healthy feet"><div><h3>5 Tips for Healthier Feet</h3><p>Simple steps you can take every day.</p></div></div><div class="article-card card"><img src="resource-foot.png" alt="Foot health"><div><h3>Plantar Fasciitis: What You Need to Know</h3><p>Causes, symptoms and how we can help.</p></div></div><div class="article-card card"><img src="resource-ankle.png" alt="Footwear"><div><h3>Choosing the Right Shoes for Your Feet</h3><p>Support your feet with the right fit.</p></div></div></div></section>
 
 <section id="shop" class="screen"><header class="topbar"><img class="topbar-logo" src="stride-logo.png" alt="Stride"><div class="topbar-actions"><button class="icon-button back-button go" data-go="more" aria-label="Back">{{back}}</button></div></header><div class="page-head"><h1>Shop</h1><p>Products currently listed in the Advanced Podiatry Solutions online shop.</p></div><div class="shop-page"><div class="shop-intro"><div class="shop-intro-top"><div><h2>Supports, exercise tools and foot-care products</h2><p>Browse the current clinic range below. Product cards open the matching product page on our website.</p></div><span class="shop-count">16 online</span></div><a class="shop-open-full" href="https://advancedpodiatry.co.nz/team-2-2/" target="_blank" rel="noopener">{{cart}} Open Full Online Shop</a></div><div class="shop-controls"><input id="shopSearch" class="shop-search" type="search" placeholder="Search shop products"></div><div class="shop-filters"><button class="shop-filter active" data-shop-filter="all">All</button><button class="shop-filter" data-shop-filter="support">Supports</button><button class="shop-filter" data-shop-filter="exercise">Exercise</button><button class="shop-filter" data-shop-filter="foot-care">Foot care</button></div><div class="shop-catalogue"><div class="shop-catalogue-head"><div><h2>Current products</h2><p id="shopResultCount">Showing products from our website</p></div></div><div id="shopProductList" class="shop-grid"></div></div><div class="shop-sync-note">Prices and availability shown here reflect the current website listing checked on 4 August 2026. The linked product page is the source of truth for variants, stock and checkout.</div></div></section>
 
@@ -1136,6 +1170,59 @@ renderMyResources();renderLibrary();bindResourceButtons();
   // Entire-app text scaling.
   function applyScale(size){document.documentElement.dataset.textSize=size;localStorage.setItem('strideTextSize',size);$$('.text-size-button').forEach(b=>b.classList.toggle('active',b.dataset.size===size));}
   $$('.text-size-button').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();applyScale(b.dataset.size)}));applyScale(localStorage.getItem('strideTextSize')||'standard');
+})();
+</script>
+
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const phases=[
+    {name:'Getting Started',weeks:'Weeks 1–4',summary:'Your initial assessment and first adjustments focus on understanding your symptoms and improving movement.'},
+    {name:'Foundation Phase',weeks:'Weeks 5–8',summary:'Changes are reinforced while exercises, strength and movement control become a bigger part of your plan.'},
+    {name:'Maintenance Phase',weeks:'Weeks 9–13',summary:'Regular FMT is gradually reduced while your podiatrist checks that progress is holding.'},
+    {name:'Ongoing Support',weeks:'After 90 days',summary:'Continue self-management with periodic support and reviews when needed.'}
+  ];
+  function currentStage(){const n=Number(localStorage.getItem('strideJourneyStage')||0);return Math.max(0,Math.min(3,Number.isFinite(n)?n:0));}
+  function syncProgressDetails(){
+    const goal=localStorage.getItem('strideGoal')||'Move more comfortably and confidently.';
+    const pain=localStorage.getItem('strideInitialPain');
+    if($('progressGoalText'))$('progressGoalText').textContent=goal;
+    if($('progressInitialPain'))$('progressInitialPain').textContent=pain!==null&&pain!==''?pain+'/10':'Not recorded';
+  }
+  function syncJourney(){
+    const idx=currentStage(), phase=phases[idx];
+    if($('journeyProgressLabel'))$('journeyProgressLabel').textContent=phase.name;
+    if($('journeyProgressPercent'))$('journeyProgressPercent').textContent=((idx+1)*25)+'%';
+    if($('journeyProgressFill'))$('journeyProgressFill').style.width=((idx+1)*25)+'%';
+    if($('homeStageLabel'))$('homeStageLabel').textContent=phase.name;
+    const notes=[
+      'You are building your foundation. Focus on consistency and noticing how your movement responds.',
+      'Keep building consistency as movement, strength and control develop.',
+      'You are moving towards greater self-management while your podiatrist monitors progress.',
+      'Keep using the tools that help you move well, with support available when needed.'
+    ];
+    if($('homeStageNote'))$('homeStageNote').textContent=notes[idx];
+    renderJourney();
+  }
+  function renderJourney(){
+    const host=$('journeyPhaseList'); if(!host)return;
+    const idx=currentStage();
+    host.innerHTML=phases.map((p,i)=>`<article class="journey-clean-card ${i<idx?'completed':''} ${i===idx?'current open':''}" data-journey-card="${i}"><button class="journey-clean-head" type="button" data-toggle-journey="${i}"><span class="journey-clean-index">${i<idx?'✓':i+1}</span><span class="journey-clean-copy"><small>${p.weeks}</small><strong>${p.name}</strong></span><span class="journey-clean-state">${i<idx?'Completed':i===idx?'Current':'Upcoming'}</span></button><div class="journey-clean-detail"><p>${p.summary}</p><button class="btn secondary" type="button" data-select-journey="${i}">${i===idx?'Current phase':'Set as current phase'}</button></div></article>`).join('');
+  }
+  document.addEventListener('click',e=>{
+    const toggle=e.target.closest('[data-toggle-journey]');
+    if(toggle){e.preventDefault();toggle.closest('.journey-clean-card')?.classList.toggle('open');return;}
+    const select=e.target.closest('[data-select-journey]');
+    if(select){e.preventDefault();localStorage.setItem('strideJourneyStage',select.dataset.selectJourney);syncJourney();return;}
+    const video=e.target.closest('.fmt-video-trigger');
+    if(video){e.preventDefault();const modal=$('fmtVideoModal');if(modal){modal.classList.add('open');modal.setAttribute('aria-hidden','false');}return;}
+    const go=e.target.closest('[data-go="progress"]');if(go)setTimeout(syncProgressDetails,0);
+    const onboarding=e.target.closest('.onboarding button');if(onboarding)setTimeout(()=>{syncProgressDetails();syncJourney();},80);
+  },true);
+  window.addEventListener('storage',()=>{syncProgressDetails();syncJourney();});
+  document.addEventListener('DOMContentLoaded',()=>{syncProgressDetails();syncJourney();});
+  syncProgressDetails();syncJourney();
 })();
 </script>
 
