@@ -1606,4 +1606,122 @@ renderMyResources();renderLibrary();bindResourceButtons();
 })();
 </script>
 
+
+<style id="v54-layout-fixes">
+/* Remove the reserved scrollbar gutter that created the white strip on onboarding. */
+#onboarding.onboarding{
+  width:min(430px,100vw)!important;
+  max-width:min(430px,100vw)!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  background:#fff!important;
+}
+#onboarding #slides{
+  width:100%!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+}
+#onboarding .slide{
+  flex:0 0 100%!important;
+  width:100%!important;
+  min-width:100%!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  scrollbar-gutter:auto!important;
+  scrollbar-width:none!important;
+}
+#onboarding .slide::-webkit-scrollbar{width:0!important;height:0!important;display:none!important}
+#onboarding .splash,
+#onboarding .splash-bg,
+#onboarding .splash-bg img,
+#onboarding .splash-content{
+  left:0!important;right:0!important;
+  width:100%!important;max-width:100%!important;
+  box-sizing:border-box!important;
+}
+#onboarding .splash-bg img{object-fit:cover!important}
+
+/* Present the FMT video as a centred dialog instead of a low bottom sheet. */
+#fmtVideoModal.modal{
+  align-items:center!important;
+  justify-content:center!important;
+  padding:18px!important;
+}
+#fmtVideoModal .modal-sheet{
+  width:min(394px,calc(100vw - 36px))!important;
+  max-height:calc(100dvh - 36px)!important;
+  overflow:auto!important;
+  border-radius:24px!important;
+  padding:16px!important;
+  margin:0!important;
+  box-shadow:0 24px 70px rgba(3,29,56,.28)!important;
+}
+#fmtVideoModal .modal-head{
+  position:sticky!important;
+  top:-16px!important;
+  z-index:5!important;
+  background:#fff!important;
+  margin:-16px -16px 14px!important;
+  padding:16px 16px 12px!important;
+  border-bottom:1px solid var(--line)!important;
+}
+#fmtVideoModal .video-embed{
+  border-radius:17px!important;
+  overflow:hidden!important;
+  background:#061f3d!important;
+  aspect-ratio:16/9!important;
+}
+#fmtVideoModal .video-embed iframe{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  border:0!important;
+}
+#fmtVideoModal .video-modal-copy{padding:14px 2px 2px!important}
+#fmtVideoModal .video-modal-copy h3{font-size:20px!important;margin:0 0 7px!important}
+#fmtVideoModal .video-modal-copy p{margin:0!important}
+@media(max-height:620px){
+  #fmtVideoModal.modal{align-items:flex-start!important;padding-top:12px!important}
+  #fmtVideoModal .modal-sheet{max-height:calc(100dvh - 24px)!important}
+}
+</style>
+<script id="v54-layout-script">
+(function(){
+  function lockOnboardingWidth(){
+    const app=document.querySelector('.app');
+    const onboarding=document.getElementById('onboarding');
+    const slides=document.getElementById('slides');
+    if(!onboarding||!slides)return;
+    const width=Math.min(430,window.innerWidth);
+    onboarding.style.width=width+'px';
+    onboarding.style.maxWidth=width+'px';
+    onboarding.style.left='50%';
+    onboarding.style.right='auto';
+    onboarding.style.transform='translateX(-50%)';
+    slides.style.width='100%';
+    slides.style.maxWidth='100%';
+    onboarding.querySelectorAll('.slide').forEach(function(slide){
+      slide.style.width='100%';
+      slide.style.minWidth='100%';
+      slide.style.maxWidth='100%';
+      slide.style.flex='0 0 100%';
+      slide.style.scrollbarGutter='auto';
+    });
+  }
+  function centreVideo(){
+    const modal=document.getElementById('fmtVideoModal');
+    if(!modal)return;
+    modal.style.alignItems='center';
+    modal.style.justifyContent='center';
+  }
+  window.addEventListener('resize',function(){lockOnboardingWidth();centreVideo();});
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){lockOnboardingWidth();centreVideo();});
+  }else{
+    lockOnboardingWidth();centreVideo();
+  }
+})();
+</script>
+
 </body></html>
