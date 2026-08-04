@@ -1724,4 +1724,53 @@ renderMyResources();renderLibrary();bindResourceButtons();
 })();
 </script>
 
+
+<style id="v55-onboarding-track-fix">
+/* The onboarding viewport clips the carousel; the slide track itself must remain visible. */
+#onboarding.onboarding{overflow:hidden!important;contain:layout paint!important}
+#onboarding #slides{
+  display:flex!important;
+  width:100%!important;
+  max-width:none!important;
+  height:100%!important;
+  overflow:visible!important;
+  will-change:transform!important;
+}
+#onboarding .slide{
+  flex:0 0 100%!important;
+  width:100%!important;
+  min-width:100%!important;
+  max-width:100%!important;
+  height:100%!important;
+  box-sizing:border-box!important;
+}
+</style>
+<script id="v55-onboarding-track-script">
+(function(){
+  function repairTrack(){
+    const onboarding=document.getElementById('onboarding');
+    const track=document.getElementById('slides');
+    if(!onboarding||!track)return;
+    const width=Math.min(430,window.innerWidth);
+    onboarding.style.width=width+'px';
+    onboarding.style.maxWidth=width+'px';
+    onboarding.style.left='50%';
+    onboarding.style.transform='translateX(-50%)';
+    onboarding.style.overflow='hidden';
+    track.style.width='100%';
+    track.style.maxWidth='none';
+    track.style.overflow='visible';
+    track.style.display='flex';
+    track.querySelectorAll('.slide').forEach(slide=>{
+      slide.style.flex='0 0 100%';
+      slide.style.width='100%';
+      slide.style.minWidth='100%';
+      slide.style.maxWidth='100%';
+    });
+  }
+  window.addEventListener('resize',repairTrack);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',repairTrack);else repairTrack();
+})();
+</script>
+
 </body></html>
